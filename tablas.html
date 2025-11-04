@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tablas del Restaurante</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+    .tab-buttons { margin-bottom: 20px; }
+    .tab-buttons button {
+      margin-right: 8px;
+      padding: 10px 18px;
+      background: #c90e06;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .tab-buttons button.active { background: #05b517; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #f4f4f4; }
+    /* Estilos para la pantalla de login */
+    .login-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10000;
+    }
+    .login-box {
+      background: #fff;
+      padding: 32px 24px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #333;
+      text-align: center;
+      min-width: 300px;
+    }
+    .login-box input {
+      width: 90%;
+      padding: 8px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .login-box button {
+      padding: 10px 20px;
+      background: #c90e06;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .login-error {
+      color: red;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .tab-buttons button {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+      table, th, td {
+        font-size: 13px;
+      }
+      .login-box {
+        min-width: 220px;
+        padding: 16px 8px;
+      }
+    }
+    @media (max-width: 600px) {
+      .tab-buttons {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .tab-buttons button {
+        width: 100%;
+        margin-bottom: 4px;
+        font-size: 12px;
+        padding: 7px 5px;
+      }
+      table, th, td {
+        font-size: 11px;
+      }
+      .login-box {
+        min-width: 120px;
+        padding: 8px 2px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla de login -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>Acceso solo para administradores</h2>
+      <input type="text" id="username" placeholder="Usuario">
+      <input type="password" id="password" placeholder="Contraseña">
+      <button onclick="loginAdmin()">Ingresar</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+  </div>
+
+  <h1>Tablas del Restaurante</h1>
+  <div class="tab-buttons" id="tabButtons"></div>
+  <div id="tabsContainer"></div>
+  <script>
+    // --- LOGIN DE ADMINISTRADOR ---
+    function loginAdmin() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const errorDiv = document.getElementById('loginError');
+      if (user === 'admin' && pass === 'admin123') {
+        document.getElementById('loginOverlay').style.display = 'none';
+      } else {
+        errorDiv.textContent = 'Usuario o contraseña incorrectos.';
+      }
+    }
+    // Permite enviar con Enter
+    document.getElementById('password').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') loginAdmin();
+    });
+
+    // Simulación del objeto DB con algunas tablas y datos de ejemplo
+    let DB = null;
+    let tableNames = [];
+
+    function cargarDB() {
+      const dbGuardado = localStorage.getItem('DB_TABLAS');
+      if (dbGuardado) {
+        DB = JSON.parse(dbGuardado);
+      } else {
+        DB = {
+          EMPRESAS: [
+            { id_empresa: 1, nombre_empresa: "Restaurante El Buen Sabor", telefono: "555-1111" }
+          ],
+          SUCURSALES: [
+            { id_sucursal: 1, nombre_sucursal: "Sucursal Centro", telefono: "555-2222" }
+          ],
+          CLIENTES: [
+            { id_cliente: 1, nombre: "Juan", apellido_paterno: "Pérez", telefono: "555-3333" }
+          ],
+          EMPLEADOS: [
+            { id_empleado: 1, nombre: "Carlos", puesto: "Mesero", telefono: "555-4444" }
+          ],
+          PRODUCTOS: [
+            { id_producto: 1, codigo_producto: "B001", nombre_producto: "Café Americano", precio_base: 25.00 },
+            { id_producto: 2, codigo_producto: "B002", nombre_producto: "Café Capuchino", precio_base: 30.00 },
+            { id_producto: 3, codigo_producto: "B003", nombre_producto: "Café Espresso", precio_base: 20.00 },
+            { id_producto: 4, codigo_producto: "B004", nombre_producto: "Café Machiatto", precio_base: 35.00 },
+            { id_producto: 5, codigo_producto: "B005", nombre_producto: "Café Azteca", precio_base: 40.00 },
+            { id_producto: 6, codigo_producto: "B006", nombre_producto: "Café Frappe", precio_base: 45.00 },
+            { id_producto: 7, codigo_producto: "B007", nombre_producto: "Café Latte", precio_base: 50.00 },
+            { id_producto: 8, codigo_producto: "B008", nombre_producto: "Café Con Leche", precio_base: 55.00 },
+            { id_producto: 9, codigo_producto: "D001", nombre_producto: "Pancakes", precio_base: 50.00 },
+            { id_producto: 10, codigo_producto: "D002", nombre_producto: "Omelette", precio_base: 60.00 },
+            { id_producto: 11, codigo_producto: "D003", nombre_producto: "Chilaquiles", precio_base: 70.00 },
+            { id_producto: 12, codigo_producto: "D004", nombre_producto: "Molletes", precio_base: 55.00 },
+            { id_producto: 13, codigo_producto: "D005", nombre_producto: "Hotcakes", precio_base: 50.00 },
+            { id_producto: 14, codigo_producto: "D006", nombre_producto: "Tostadas", precio_base: 45.00 },
+            { id_producto: 15, codigo_producto: "D007", nombre_producto: "Huevos Rancheros", precio_base: 65.00 },
+            { id_producto: 16, codigo_producto: "D008", nombre_producto: "Enchiladas", precio_base: 75.00 },
+            { id_producto: 17, codigo_producto: "C001", nombre_producto: "Mole", precio_base: 120.00 },
+            { id_producto: 18, codigo_producto: "C002", nombre_producto: "Pozole", precio_base: 110.00 },
+            { id_producto: 19, codigo_producto: "C003", nombre_producto: "Cochinita Pibil", precio_base: 130.00 },
+            { id_producto: 20, codigo_producto: "C004", nombre_producto: "Chiles en Nogada", precio_base: 140.00 },
+            { id_producto: 21, codigo_producto: "C005", nombre_producto: "Barbacoa", precio_base: 150.00 },
+            { id_producto: 22, codigo_producto: "C006", nombre_producto: "Carnitas", precio_base: 125.00 },
+            { id_producto: 23, codigo_producto: "C007", nombre_producto: "Tlayudas", precio_base: 135.00 },
+            { id_producto: 24, codigo_producto: "C008", nombre_producto: "Tacos", precio_base: 100.00 },
+            { id_producto: 25, codigo_producto: "CN001", nombre_producto: "Ensalada mediterránea", precio_base: 80.00 },
+            { id_producto: 26, codigo_producto: "CN002", nombre_producto: "Ensalada César con pollo", precio_base: 85.00 },
+            { id_producto: 27, codigo_producto: "CN003", nombre_producto: "Crema de calabaza", precio_base: 90.00 },
+            { id_producto: 28, codigo_producto: "CN004", nombre_producto: "Fideos chinos con pollo y verduras", precio_base: 95.00 },
+            { id_producto: 29, codigo_producto: "CN005", nombre_producto: "Espaguetis con queso y pimienta negra", precio_base: 100.00 },
+            { id_producto: 30, codigo_producto: "CN006", nombre_producto: "Macarrones con berenjenas y tomate", precio_base: 105.00 },
+            { id_producto: 31, codigo_producto: "CN007", nombre_producto: "Huevos revueltos", precio_base: 110.00 },
+            { id_producto: 32, codigo_producto: "CN008", nombre_producto: "Muslos de pollo", precio_base: 115.00 },
+            { id_producto: 33, codigo_producto: "P001", nombre_producto: "Pay de Limón", precio_base: 40.00 },
+            { id_producto: 34, codigo_producto: "P002", nombre_producto: "Flan Napolitano", precio_base: 45.00 },
+            { id_producto: 35, codigo_producto: "P003", nombre_producto: "Pay de Mango", precio_base: 50.00 },
+            { id_producto: 36, codigo_producto: "P004", nombre_producto: "Gelatina de Chocolate", precio_base: 35.00 },
+            { id_producto: 37, codigo_producto: "P005", nombre_producto: "Brownie", precio_base: 55.00 },
+            { id_producto: 38, codigo_producto: "P006", nombre_producto: "Pastel de Chocolate", precio_base: 60.00 },
+            { id_producto: 39, codigo_producto: "P007", nombre_producto: "Tiramisú", precio_base: 70.00 },
+            { id_producto: 40, codigo_producto: "P008", nombre_producto: "Carlota de Durazno", precio_base: 65.00 }
+          ],
+          MESAS: [
+            { id_mesa: 1, numero_mesa: "A1", capacidad_personas: 4 },
+            { id_mesa: 2, numero_mesa: "A2", capacidad_personas: 4 },
+            { id_mesa: 3, numero_mesa: "B1", capacidad_personas: 6 },
+            { id_mesa: 4, numero_mesa: "B2", capacidad_personas: 6 },
+            { id_mesa: 5, numero_mesa: "C1", capacidad_personas: 2 },
+            { id_mesa: 6, numero_mesa: "C2", capacidad_personas: 2 },
+            { id_mesa: 7, numero_mesa: "D1", capacidad_personas: 8 },
+            { id_mesa: 8, numero_mesa: "D2", capacidad_personas: 8 }
+          ],
+          VENTAS: [
+            { id_venta: 1, numero_ticket: "T001", fecha_hora_inicio: "2024-06-01T12:00:00", mesero: "Carlos", mesa_cliente: "A1", producto: "Café Americano", cantidad: 1 }
+          ]
+          // ...agrega más tablas si lo deseas...
+        };
+      }
+      tableNames = Object.keys(DB);
+    }
+
+    // Guardar empleados y mesas en localStorage cada vez que se modifican
+    function guardarDB() {
+      localStorage.setItem('DB_TABLAS', JSON.stringify(DB));
+    }
+
+    // --- ACTUALIZAR TABLA DE VENTAS Y PRODUCTOS CON PEDIDOS DE LOCALSTORAGE ---
+    function actualizarVentasDesdePedidos() {
+      const pedidos = JSON.parse(localStorage.getItem('orders')) || [];
+      DB.VENTAS = [
+        { id_venta: 1, numero_ticket: "T001", fecha_hora_inicio: "2024-06-01T12:00:00", mesero: "Carlos", mesa_cliente: "A1", producto: "Café Americano", cantidad: 1 }
+      ];
+      pedidos.forEach((pedido, idx) => {
+        DB.VENTAS.push({
+          id_venta: DB.VENTAS.length + 1,
+          numero_ticket: "T" + (DB.VENTAS.length + 1).toString().padStart(3, '0'),
+          fecha_hora_inicio: pedido.orderTime,
+          mesero: pedido.waiter,
+          mesa_cliente: pedido.client,
+          producto: pedido.productName,
+          cantidad: pedido.quantity
+        });
+
+        // Agregar producto a la tabla PRODUCTOS si no existe
+        const existe = DB.PRODUCTOS.some(p => p.nombre_producto === pedido.productName);
+        if (!existe) {
+          DB.PRODUCTOS.push({
+            id_producto: DB.PRODUCTOS.length + 1,
+            nombre_producto: pedido.productName,
+            precio_base: pedido.price
+          });
+        }
+      });
+      guardarDB();
+    }
+
+    // Crear botones para cada tabla
+    function crearBotonesYContenedores() {
+      const tabButtonsDiv = document.getElementById('tabButtons');
+      const tabsContainer = document.getElementById('tabsContainer');
+      tabButtonsDiv.innerHTML = '';
+      tabsContainer.innerHTML = '';
+      tableNames.forEach((table, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = table;
+        btn.onclick = () => showTab(table);
+        btn.id = 'btn-' + table;
+        tabButtonsDiv.appendChild(btn);
+
+        // Crear el contenedor de la tabla
+        const tabDiv = document.createElement('div');
+        tabDiv.id = 'tab-' + table;
+        tabDiv.className = 'tab-content';
+        tabsContainer.appendChild(tabDiv);
+      });
+    }
+
+    // Mostrar la tabla seleccionada
+    function showTab(table) {
+      if (table === "VENTAS" || table === "PRODUCTOS") {
+        actualizarVentasDesdePedidos();
+      }
+      tableNames.forEach(t => {
+        document.getElementById('tab-' + t).classList.remove('active');
+        document.getElementById('btn-' + t).classList.remove('active');
+      });
+      document.getElementById('tab-' + table).classList.add('active');
+      document.getElementById('btn-' + table).classList.add('active');
+      renderTable(table);
+    }
+
+    // Renderizar la tabla en HTML
+    function renderTable(table) {
+      const data = DB[table];
+      const tabDiv = document.getElementById('tab-' + table);
+      tabDiv.innerHTML = ''; // Limpia el contenido
+
+      // Apartado especial para EMPLEADOS
+      if (table === "EMPLEADOS") {
+        // Formulario para agregar empleado
+        tabDiv.innerHTML += `
+          <div style="margin-bottom:20px; padding:10px; background:#f9f9f9; border-radius:8px;">
+            <h3>Agregar Empleado</h3>
+            <input type="text" id="nuevoNombre" placeholder="Nombre" style="margin-right:5px;">
+            <input type="text" id="nuevoPuesto" placeholder="Puesto" style="margin-right:5px;">
+            <input type="text" id="nuevoTelefono" placeholder="Teléfono" style="margin-right:5px;">
+            <button onclick="agregarEmpleado()">Agregar</button>
+          </div>
+        `;
+      }
+
+      // Apartado especial para MESAS: asignar mesero
+      if (table === "MESAS") {
+        tabDiv.innerHTML += `
+          <div style="margin-bottom:20px; padding:10px; background:#f9f9f9; border-radius:8px;">
+            <h3>Asignar Mesero a cada Mesa</h3>
+            <button onclick="asignarMeserosAMesas()">Asignar Meseros</button>
+          </div>
+        `;
+      }
+
+      if (!data || data.length === 0) {
+        tabDiv.innerHTML += '<p>No hay datos en esta tabla.</p>';
+        return;
+      }
+      const columns = Object.keys(data[0]);
+      let html = '<table><thead><tr>';
+      columns.forEach(col => html += `<th>${col}</th>`);
+      // Mostrar columna Mesero en MESAS
+      if (table === "MESAS") html += '<th>Mesero Asignado</th>';
+      html += '</tr></thead><tbody>';
+      data.forEach((row, idx) => {
+        html += '<tr>';
+        columns.forEach(col => html += `<td>${row[col]}</td>`);
+        // Mostrar mesero asignado en MESAS
+        if (table === "MESAS") {
+          html += `<td>${row.mesero_asignado ? row.mesero_asignado : ''}</td>`;
+        }
+        // ...existing code for eliminar empleado...
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      tabDiv.innerHTML += html;
+    }
+
+    // Función para agregar empleado
+    window.agregarEmpleado = function() {
+      const nombre = document.getElementById('nuevoNombre').value.trim();
+      const puesto = document.getElementById('nuevoPuesto').value.trim();
+      const telefono = document.getElementById('nuevoTelefono').value.trim();
+      if (!nombre || !puesto || !telefono) {
+        alert('Completa todos los campos.');
+        return;
+      }
+      DB.EMPLEADOS.push({
+        id_empleado: DB.EMPLEADOS.length + 1,
+        nombre,
+        puesto,
+        telefono
+      });
+      guardarDB(); // <-- GUARDA CAMBIO EN LOCALSTORAGE
+      renderTable("EMPLEADOS");
+      document.getElementById('nuevoNombre').value = '';
+      document.getElementById('nuevoPuesto').value = '';
+      document.getElementById('nuevoTelefono').value = '';
+    };
+
+    // Función para eliminar empleado
+    window.eliminarEmpleado = function(idx) {
+      if (confirm('¿Seguro que deseas eliminar este empleado?')) {
+        DB.EMPLEADOS.splice(idx, 1);
+        guardarDB(); // <-- GUARDA CAMBIO EN LOCALSTORAGE
+        renderTable("EMPLEADOS");
+      }
+    };
+
+    // Asignar meseros a mesas (solo empleados con puesto "Mesero")
+    window.asignarMeserosAMesas = function() {
+      // Filtrar empleados con puesto Mesero
+      const meseros = DB.EMPLEADOS.filter(e => e.puesto && e.puesto.toLowerCase() === "mesero");
+      // Asignar uno por uno, si hay más mesas que meseros se repiten
+      DB.MESAS.forEach((mesa, idx) => {
+        if (meseros.length > 0) {
+          const mesero = meseros[idx % meseros.length];
+          mesa.mesero_asignado = mesero ? mesero.nombre : '';
+        } else {
+          mesa.mesero_asignado = '';
+        }
+      });
+      guardarDB(); // <-- Agrega esta línea para guardar los cambios en la base de datos
+      renderTable("MESAS");
+    };
+
+    // Inicializar DB y botones al cargar la página
+    cargarDB();
+    crearBotonesYContenedores();
+    if (tableNames.length > 0) showTab(tableNames[0]);
+  </script>
+</body>
+</html>

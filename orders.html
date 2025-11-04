@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pedidos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Pedidos</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Hora del Pedido</th>
+        <th>ID Producto</th>
+        <th>Nombre Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Mesero</th>
+        <th>Mesa/Cliente</th>
+      </tr>
+    </thead>
+    <tbody id="ordersTableBody">
+      <!-- Orders will be dynamically inserted here -->
+    </tbody>
+  </table>
+  <script>
+    // --- INICIO BASE DE DATOS EN MEMORIA ---
+    // Estructura de tablas como arrays de objetos
+    const DB = {
+      EMPRESAS: [],
+      SUCURSALES: [],
+      CLIENTES: [],
+      EMPLEADOS: [],
+      USUARIO_SISTEMAS: [],
+      CATEGORIA_PRODUCTOS: [],
+      PRODUCTOS: [],
+      MODIFICADORES: [],
+      PRODUCTOS_MODIFICADORES: [],
+      MESAS: [],
+      VENTAS: [],
+      PROVEEDORES: [],
+      MATERIAS_PRIMAS: [],
+      INVENTARIO_SUCURSALES: [],
+      ORDEN_COMPRAS: [],
+      DETALLE_ORDEN_COMPRA: [],
+      RECETAS: [],
+      MOVIMIENTO_INVENTARIOS: [],
+      RESERVACIONES: [],
+      DELIVERYS: [],
+      TIPO_SERVICIOS: [],
+      METODOS_PAGOS: [],
+      PRECIO_MATERIAS_PRIMAS: [],
+      CONFIGURACION_IMPUESTOS: [],
+      ESTADO_PRODUCTOS: [],
+      ESTADO_RESERVACIONES: [],
+      Inventarios: [],
+      Valores: []
+    };
+
+    // Ejemplo de inserción de datos mínimos para cada tabla
+    DB.EMPRESAS.push({
+      id_empresa: 1,
+      nombre_empresa: "Ejemplo S.A.",
+      rfc: "RFC123456",
+      direccion_fiscal: "Calle Falsa 123",
+      telefono: "555-1234",
+      email: "info@ejemplo.com",
+      logo: "logo.png",
+      fecha_creacion: new Date().toISOString(),
+      activa: true
+    });
+
+    DB.SUCURSALES.push({
+      id_sucursal: 1,
+      id_empresa: 1,
+      nombre_sucursal: "Sucursal Centro",
+      direccion: "Av. Principal 100",
+      telefono: "555-5678",
+      email: "centro@ejemplo.com",
+      gerente: "Ana López",
+      fecha_apertura: "2020-01-01",
+      capacidad_personas: 80,
+      numero_mesas: 20,
+      activa: true
+    });
+
+    DB.CLIENTES.push({
+      id_cliente: 1,
+      nombre: "Juan",
+      apellido_paterno: "Pérez",
+      apellido_materno: "López",
+      telefono: "555-6789",
+      email: "juan@example.com",
+      fecha_nacimiento: "1990-01-01",
+      direccion: "Av. Siempre Viva 742",
+      fecha_registro: new Date().toISOString()
+    });
+
+    DB.EMPLEADOS.push({
+      id_empleado: 1,
+      id_sucursal: 1,
+      numero_empleado: "E001",
+      nombre: "Carlos",
+      apellido_paterno: "Ramírez",
+      apellido_materno: "Gómez",
+      puesto: "Mesero",
+      salario_base: 8000,
+      fecha_ingreso: "2022-01-01",
+      telefono: "555-8888",
+      email: "carlos@ejemplo.com",
+      direccion: "Calle 2 #34",
+      activo: true
+    });
+
+    DB.USUARIO_SISTEMAS.push({
+      id_usuario: 1,
+      id_empleado: 1,
+      username: "carlosr",
+      password_hash: "hash123",
+      rol: "admin",
+      ultimo_acceso: new Date().toISOString(),
+      intentos_fallidos: 0,
+      activo: true
+    });
+
+    DB.CATEGORIA_PRODUCTOS.push({
+      id_categoria: 1,
+      nombre_categoria: "Bebidas",
+      descripcion: "Cafés y jugos",
+      orden_display: 1,
+      color_hex: "#ffcc00",
+      activa: true
+    });
+
+    DB.PRODUCTOS.push({
+      id_producto: 1,
+      id_categoria: 1,
+      codigo_producto: "B001",
+      nombre_producto: "Café Americano",
+      descripcion: "Café negro",
+      precio_base: 25.00,
+      costo_promedio: 10.00,
+      tiempo_preparacion: 5,
+      disponible: true,
+      activo: true
+    });
+
+    DB.MODIFICADORES.push({
+      id_modificador: 1,
+      nombre_modificador: "Extra leche",
+      precio_adicional: 5.00,
+      tipo_modificador: "ingrediente_extra",
+      activo: true
+    });
+
+    DB.PRODUCTOS_MODIFICADORES.push({
+      id_producto_modificador: 1,
+      id_producto: 1,
+      id_modificador: 1,
+      obligatorio: false,
+      activo: true
+    });
+
+    DB.MESAS.push({
+      id_mesa: 1,
+      id_sucursal: 1,
+      numero_mesa: "A1",
+      capacidad_personas: 4,
+      zona_ubicacion: "interior",
+      tipo_mesa: "interior",
+      activa: true
+    });
+
+    DB.VENTAS.push({
+      id_venta: 1,
+      id_sucursal: 1,
+      id_cliente: 1,
+      id_mesa: 1,
+      id_empleado_mesero: 1,
+      numero_ticket: "T001",
+      fecha_hora_inicio: new Date().toISOString(),
+      fecha_hora_cierre: null,
+      descuento: 0,
+      propina: 0,
+      id_tipo_servicio: 1,
+      id_metodo_pago: 1,
+      observaciones: ""
+    });
+
+    DB.PROVEEDORES.push({
+      id_proveedor: 1,
+      nombre_proveedor: "Proveedor 1",
+      contacto: "Luis",
+      telefono: "555-9999",
+      email: "proveedor1@ejemplo.com",
+      direccion: "Calle Proveedor 10",
+      rfc: "RFC987654",
+      dias_credito: 30,
+      activo: true
+    });
+
+    DB.MATERIAS_PRIMAS.push({
+      id_materia_prima: 1,
+      codigo_interno: "MP001",
+      nombre_materia_prima: "Café",
+      unidad_medida: "kg",
+      stock_minimo: 5,
+      stock_maximo: 50,
+      costo_promedio: 120.00,
+      fecha_ultima_compra: "2024-01-01",
+      activa: true
+    });
+
+    DB.INVENTARIO_SUCURSALES.push({
+      id_inventario: 1,
+      id_sucursal: 1,
+      id_materia_prima: 1,
+      stock_actual: 20,
+      fecha_ultimo_movimiento: new Date().toISOString()
+    });
+
+    DB.ORDEN_COMPRAS.push({
+      id_orden_compra: 1,
+      id_sucursal: 1,
+      id_proveedor: 1,
+      id_empleado_autoriza: 1,
+      numero_orden: "OC001",
+      fecha_orden: "2024-06-01",
+      fecha_entrega_esperada: "2024-06-05",
+      estado_orden: "pendiente",
+      observaciones: ""
+    });
+
+    DB.DETALLE_ORDEN_COMPRA.push({
+      id_detalle_orden: 1,
+      id_orden_compra: 1,
+      id_materia_prima: 1,
+      cantidad_solicitada: 10,
+      id_precio_materia: 1
+    });
+
+    DB.RECETAS.push({
+      id_receta: 1,
+      id_producto: 1,
+      id_materia_prima: 1,
+      cantidad_necesaria: 0.02,
+      costo_porcion: 2.40,
+      activa: true
+    });
+
+    DB.MOVIMIENTO_INVENTARIOS.push({
+      id_movimiento: 1,
+      id_inventario: 1,
+      tipo_movimiento: "entrada",
+      cantidad: 10,
+      costo_unitario: 120.00,
+      fecha_movimiento: new Date().toISOString(),
+      referencia_documento: "OC001",
+      id_empleado_registra: 1,
+      observaciones: ""
+    });
+
+    DB.RESERVACIONES.push({
+      id_reservacion: 1,
+      id_cliente: 1,
+      id_sucursal: 1,
+      id_mesa: 1,
+      fecha_reservacion: "2024-06-10",
+      hora_reservacion: "13:00",
+      numero_personas: 2,
+      estado_reservacion: "confirmada",
+      observaciones: "",
+      telefono_contacto: "555-6789"
+    });
+
+    DB.DELIVERYS.push({
+      id_delivery: 1,
+      id_venta: 1,
+      id_repartidor: null,
+      direccion_entrega: "Av. Siempre Viva 742",
+      telefono_cliente: "555-6789",
+      coordenadas_gps: "",
+      tiempo_estimado: 30,
+      costo_delivery: 50.00,
+      estado_delivery: "asignado",
+      fecha_hora_asignacion: new Date().toISOString(),
+      fecha_hora_entrega: null
+    });
+
+    DB.TIPO_SERVICIOS.push({
+      id_tipo_servicio: 1,
+      nombre_tipo: "En sitio",
+      descripcion: "Consumo en restaurante",
+      activo: true
+    });
+
+    DB.METODOS_PAGOS.push({
+      id_metodo_pago: 1,
+      nombre_metodo: "Efectivo",
+      descripcion: "Pago en efectivo",
+      activo: true
+    });
+
+    DB.PRECIO_MATERIAS_PRIMAS.push({
+      id_precio_materia: 1,
+      id_materia_prima: 1,
+      id_proveedor: 1,
+      precio_unitario: 120.00,
+      fecha_inicio: "2024-01-01",
+      fecha_fin: null,
+      activo: true
+    });
+
+    DB.CONFIGURACION_IMPUESTOS.push({
+      id_impuesto: 1,
+      nombre_impuesto: "IVA",
+      porcentaje: 16.00,
+      fecha_inicio: "2024-01-01",
+      fecha_fin: null,
+      activo: true
+    });
+
+    DB.ESTADO_PRODUCTOS.push({
+      id_estado_producto: 1,
+      nombre_estado: "Disponible",
+      descripcion: "Producto disponible para venta",
+      orden_secuencia: 1,
+      activo: true
+    });
+
+    DB.ESTADO_RESERVACIONES.push({
+      id_estado_reservacion: 1,
+      nombre_estado: "Confirmada",
+      descripcion: "Reservación confirmada",
+      activo: true
+    });
+
+    DB.Inventarios.push({
+      id_inventario: 1,
+      Valor: 1,
+      descripcion: "Inventario principal",
+      activo: true
+    });
+
+    DB.Valores.push({
+      id_valor: 1,
+      Kg: 10.0,
+      Litros: 5.0
+    });
+
+    // --- FIN BASE DE DATOS EN MEMORIA ---
+
+    // ...existing code for orders table...
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+    const tableBody = document.getElementById('ordersTableBody');
+    orders.forEach(order => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${order.orderTime}</td>
+        <td>${order.productId || ''}</td>
+        <td>${order.productName || ''}</td>
+        <td>${order.quantity || ''}</td>
+        <td>$${order.price !== undefined ? Number(order.price).toFixed(2) : ''}</td>
+        <td>${order.waiter || ''}</td>
+        <td>${order.client || ''}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+    // Obtener todos los clientes
+    const clientes = DB.CLIENTES;
+    console.log(clientes);
+
+    // Buscar un producto por id
+    const producto = DB.PRODUCTOS.find(p => p.id_producto === 1);
+    console.log(producto);
+
+    // Agregar un nuevo empleado
+    DB.EMPLEADOS.push({
+      id_empleado: DB.EMPLEADOS.length + 1,
+      id_sucursal: 1,
+      numero_empleado: "E002",
+      nombre: "María",
+      apellido_paterno: "Sánchez",
+      apellido_materno: "Díaz",
+      puesto: "Cocinera",
+      salario_base: 9000,
+      fecha_ingreso: "2023-01-01",
+      telefono: "555-7777",
+      email: "maria@ejemplo.com",
+      direccion: "Calle 3 #56",
+      activo: true
+    });
+
+    // Recorrer todas las ventas
+    DB.VENTAS.forEach(venta => {
+      console.log(venta.numero_ticket, venta.fecha_hora_inicio);
+    });
+  </script>
+</body>
+</html>
