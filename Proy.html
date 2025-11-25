@@ -5,177 +5,147 @@
   <title>Platin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-      width: 100%;
-    }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-    .header {
-      background-color: #c90e06;
-      color: black;
-      text-align: center;
-      padding: 10px 0;
-      width: 100%;
-      height: 45px;
-    }
-    .Logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 150px;
-      height: auto;
-      z-index: 1;
-    }
+  .header {
+    background-color: #c90e06;
+    color: black;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .header h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .Logo {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: clamp(80px, 15vw, 150px);
+    height: auto;
+    z-index: 1;
+  }
     
-    .search-container {
-      position: absolute;
-      top: 15%;
-      left: 30px;        
-      display: flex;
-      align-items: center;
-      background-color: #05b517;
-      padding: 15px;
-      border-radius: 80px;
-    }
-  
-    .search-container input[type=text] {
-      padding: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      width: 200px;
-      border-radius: 20px 0 0 20px;
-      text-align: center;
-    }
-  
-    .search-container button {
-      padding: 6px 10px;
-      background: #ddd;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 0 20px 20px 0;
-      cursor: pointer;
-    }
-    .search-container button:hover {
-      background: #ccc;
-    }
-    .tacos{
-      position: absolute;
-      top: 250px;
-      left: 50px;
-      width: 90%;
-      max-width: 800px;
-      height: auto;
-      z-index: 1;
-    }  
-    .Encuentranos, .en {
-      position: absolute;
-      top: 500px;
-      width: auto;
-      height: auto;
-      z-index: 1;
-      text-align: right;
-    }
-    .Encuentranos {
-      right: 10%;
-    }
-    .en {
-      right: 8%;
-    }
-    .Didi, .Rappi, .Uber {
-      position: absolute;
-      top: 600px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-    .Didi {
-      right: 17%;
-    }
-    .Rappi {
-      right: 10%;
-    }
-    .Uber {
-      right: 3%;
-    }
-    .Americano, .Capuchino, .Espresso, .Machiatto, .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed {
-      position: absolute;
-      top: 1200px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-    .Americano {
-      left: 10%;
-    }
-    .Capuchino {
-      left: 30%;
-    }
-    .Espresso {
-      left: 50%;
-    }
-    .Machiatto {
-      left: 70%;
-    }
-    .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed {
-      position: absolute;
-      top: 1500px; /* Adjusted to move them further down */
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-    .AztecaRenamed {
-      left: 10%;
-    }
-    .FrappeRenamed {
-      left: 30%;
-    }
-    .LatteRenamed {
-      left: 50%;
-    }
-    .ConlecheRenamed {
-      left: 70%;
-    }
-    .slider-box{
-      width: 90%;
-      max-width: 400px;
-      height: 400px;
-      margin: 50px auto 0;
-      overflow: hidden;
-      position: absolute;
-      top: 150px;
-      right: 0;
-      transform: translateX(-10%);
-      z-index: 1;
-    }
+  .search-container {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background-color: #05b517;
+    padding: clamp(8px, 2vw, 15px);
+    border-radius: 80px;
+    flex-wrap: wrap;
+  }
 
-    .slider-box ul{
-      display: flex;
-      padding: 0;
-      width: 300%;
-      animation: slide 20s infinite alternate ease-in-out;
-    }
-    .slider-box li{
-      width: 200%;
-      list-style: none;
-      position: relative;
-    }
-    .slider-box img{
-      width: 100%;
-    }
-    @keyframes slide{
-      0% {margin-left: 0;}
-      20% {margin-left: 0;}
+  .search-container input[type=text] {
+    padding: clamp(4px, 1vw, 6px);
+    border: 1px solid #ccc;
+    font-size: clamp(12px, 2vw, 16px);
+    width: clamp(120px, 20vw, 200px);
+    border-radius: 20px 0 0 20px;
+    text-align: center;
+  }
 
-      25% {margin-left: -100%;}
-      45% {margin-left: -100%;}
+  .search-container button {
+    padding: clamp(4px, 1vw, 6px) clamp(8px, 1.5vw, 10px);
+    background: #ddd;
+    font-size: clamp(12px, 2vw, 16px);
+    border: 1px solid #ccc;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+  }
 
-      50% {margin-left: -200%;}
-      70% {margin-left: -200%;}
+  .tacos {
+    position: relative;
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    z-index: 1;
+  }
 
-    }
+  .tacos img {
+    width: 100%;
+    height: auto;
+  }
+
+  .Encuentranos, .en {
+    text-align: right;
+    margin: 2rem 5% 0 0;
+  }
+
+  .Encuentranos h3, .en h3 {
+    margin: 0;
+    font-size: clamp(1.2rem, 3vw, 24px);
+  }
+
+  .Didi, .Rappi, .Uber {
+    display: inline-block;
+    width: clamp(60px, 12vw, 100px);
+    height: auto;
+    margin: 0 5px;
+  }
+
+  .Didi img, .Rappi img, .Uber img {
+    width: 100%;
+    height: auto;
+  }
+
+  .slider-box {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 16/9;
+    margin: 2rem auto;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 1;
+  }
+
+  .slider-box ul {
+    display: flex;
+    padding: 0;
+    width: 300%;
+    animation: slide 20s infinite alternate ease-in-out;
+    height: 100%;
+  }
+
+  .slider-box li {
+    width: 33.33%;
+    list-style: none;
+    position: relative;
+    height: 100%;
+  }
+
+  .slider-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes slide {
+    0% { margin-left: 0; }
+    20% { margin-left: 0; }
+    25% { margin-left: -100%; }
+    45% { margin-left: -100%; }
+    50% { margin-left: -200%; }
+    70% { margin-left: -200%; }
+  }
     .menu {
       display: none;
       flex-direction: column;
@@ -203,32 +173,33 @@
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      width: 40px;
-      height: 30px;
+      width: 30px;
+      height: 24px;
       justify-content: space-between;
       position: fixed;
-      top: 20px;
-      left: 20px;
+      top: 15px;
+      left: 15px;
       z-index: 3;
       transition: left 0.3s;
     }
     .line {
-      height: 5px;
+      height: 3px;
       background-color: #333;
       width: 100%;
     }
     .hamburger.open {
-      left: calc(100% - 60px);
+      left: calc(100% - 50px);
     }
     nav {
-      position: absolute;
-      top: 1000px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 15px;
+      position: relative;
+      width: 95%;
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: clamp(12px, 3vw, 20px);
       border: 4px solid #928a8a;
       border-radius: 20px;
-      justify-content: center;
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
     }
     nav ul {
       list-style-type: none;
@@ -237,28 +208,40 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      gap: clamp(12px, 3vw, 32px);
+      width: 100%;
     }
     nav li {
-      margin: 10px;
+      margin: 0;
+      flex: 1 1 clamp(80px, 15vw, 160px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 80px;
+      max-width: 200px;
     }
     nav a {
       text-decoration: none;
       color: #9b59b6;
-      font-size: 24px;
+      font-size: clamp(14px, 2vw, 24px);
       font-family: 'Arial', sans-serif;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       transition: color 0.3s ease;
     }
     nav a:hover {
       color: #c39bd3;
     }
     nav a img {
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      max-width: clamp(80px, 12vw, 160px);
+      height: auto;
       border: 2px solid transparent;
       transition: border 0.3s ease;
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      display: block;
     }
     nav a:hover img {
       border: 5px solid #928a8a;
@@ -294,200 +277,154 @@
       font-weight: bold;
     }
    
-    .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas {
-      position: absolute;
-      top: 1200px;
-      width: 50px;
+    .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas,
+    .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos,
+    .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8,
+    .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8,
+    .Americano, .Capuchino, .Espresso, .Machiatto, .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed {
+      position: relative;
+      width: clamp(40px, 8vw, 100px);
       height: auto;
+      margin: 2rem 5%;
       z-index: 1;
+      display: inline-block;
     }
-    .Pancakes {
-      left: 10%;
-    }
-    .Omelette {
-      left: 30%;
-    }
-    .Chilaquiles {
-      left: 50%;
-    }
-    .Molletes {
-      left: 70%;
-    }
-    .Hotcakes {
-      left: 10%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Tostadas {
-      left: 30%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .HuevosRancheros {
-      left: 50%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Enchiladas {
-      left: 70%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos {
-      position: absolute;
-      top: 1200px;
-      width: 50px;
-      height: auto;
-      z-index: 1;
-    }
-    .Mole {
-      left: 10%;
-    }
-    .Pozole {
-      left: 30%;
-    }
-    .Cochinita {
-      left: 50%;
-    }
-    .Chiles {
-      left: 70%;
-    }
-    .Barbacoa {
-      left: 10%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Carnitas {
-      left: 30%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Tlayudas {
-      left: 50%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Tacos {
-      left: 70%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8 {
-      position: absolute;
-      top: 1200px;
-      width: 50px;
-      height: auto;
-      z-index: 1;
-    }
-    .Cena1 {
-      left: 10%;
-    }
-    .Cena2 {
-      left: 30%;
-    }
-    .Cena3 {
-      left: 50%;
-    }
-    .Cena4 {
-      left: 70%;
-    }
-    .Cena5 {
-      left: 10%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Cena6 {
-      left: 30%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Cena7 {
-      left: 50%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Cena8 {
-      left: 70%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8 {
-      position: absolute;
-      top: 1200px;
-      width: 50px;
-      height: auto;
-      z-index: 1;
-    }
-    .Postre1 {
-      left: 10%;
-    }
-    .Postre2 {
-      left: 30%;
-    }
-    .Postre3 {
-      left: 50%;
-    }
-    .Postre4 {
-      left: 70%;
-    }
-    .Postre5 {
-      left: 10%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Postre6 {
-      left: 30%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Postre7 {
-      left: 50%;
-      top: 1500px; /* Adjusted to move further down */
-    }
-    .Postre8 {
-      left: 70%;
-      top: 1500px; /* Adjusted to move further down */
-    }
+
     .side-panel {
       position: fixed;
       top: 0;
-      right: -300px; /* Change from left to right */
-      width: 300px;
+      right: -100%;
+      width: min(90vw, 350px);
       height: 100%;
       background-color: #f4f4f4;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* Adjust shadow direction */
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
       padding: 20px;
       box-sizing: border-box;
-      transition: right 0.3s ease; /* Change transition to right */
+      transition: right 0.3s ease;
       z-index: 1001;
+      overflow-y: auto;
     }
 
     .side-panel.open {
-      right: 0; /* Open from the right */
+      right: 0;
     }
 
     .side-panel h2 {
-      font-size: 20px;
+      font-size: clamp(16px, 4vw, 20px);
       margin-bottom: 10px;
     }
 
     .side-panel p {
       margin: 10px 0;
+      font-size: clamp(12px, 2vw, 14px);
     }
 
-    .side-panel input[type="number"] {
+    .side-panel input {
       width: 100%;
-      padding: 5px;
+      padding: 8px;
       margin-bottom: 10px;
       box-sizing: border-box;
+      font-size: clamp(12px, 2vw, 14px);
     }
 
     .side-panel button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background-color: #05b517;
       color: white;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: clamp(12px, 2vw, 16px);
     }
 
     .side-panel button:hover {
       background-color: #04a314;
     }
 
+    @media (max-width: 1024px) {
+      nav li {
+        min-width: 70px;
+        max-width: 140px;
+      }
+      nav a img {
+        max-width: 120px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-container {
+        flex-direction: column;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        padding: 8px;
+      }
+      .search-container input[type=text] {
+        width: 100%;
+        margin-bottom: 8px;
+      }
+      nav {
+        margin: 2rem auto;
+        padding: 10px;
+      }
+      nav ul {
+        gap: 16px;
+      }
+      nav li {
+        min-width: 60px;
+        max-width: 100px;
+      }
+      nav a img {
+        max-width: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.2rem;
+      }
+      .Logo {
+        width: 60px;
+        right: 10px;
+      }
+      .search-container {
+        padding: 5px;
+      }
+      .search-container input[type=text] {
+        width: 100%;
+        font-size: 12px;
+      }
+      nav {
+        width: 98%;
+        margin: 1rem auto;
+        padding: 8px;
+      }
+      nav ul {
+        gap: 8px;
+      }
+      nav li {
+        min-width: 50px;
+        max-width: 80px;
+      }
+      nav a img {
+        max-width: 60px;
+      }
+      .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas,
+      .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos,
+      .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8,
+      .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8,
+      .Americano, .Capuchino, .Espresso, .Machiatto, .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed {
+        width: 30px;
+        margin: 1rem 3%;
+      }
+    }
+
     #desayunos-section {
-      z-index: 2; /* Ensure it appears above other sections */
+      z-index: 2;
     }
 
     #bebidas-section {
-      z-index: 1; /* Ensure it appears below desayunos-section */
+      z-index: 1;
     }
   </style>
 </head>

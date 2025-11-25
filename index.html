@@ -2,1159 +2,667 @@
 <html>
 <head>
     <meta charset="UTF-8">
-  <title>Platin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      overflow-x: hidden;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
-      width: 100%;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-
-    .header {
-      background-color: #c90e06;
-      color: black;
-      text-align: center;
-      padding: 10px 0;
-      width: 100%;
-      height: 45px;
-      position: relative;
-    }
-
-    .header h1 {
-      margin-top: 0px;
-      color: white;
-    }
-
-    .Logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 150px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Logo img {
-      width: 100%;
-      height: auto;
-    }
-    
-    .search-container {
-      position: absolute;
-      top: 15%;
-      left: 30px;        
-      display: flex;
-      align-items: center;
-      background-color: #05b517;
-      padding: 15px;
-      border-radius: 80px;
-      max-width: calc(100% - 200px);
-    }
-  
-    .search-container input[type=text] {
-      padding: 6px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      width: 200px;
-      border-radius: 20px 0 0 20px;
-      text-align: center;
-    }
-  
-    .search-container button {
-      padding: 6px 10px;
-      background: #ddd;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 0 20px 20px 0;
-      cursor: pointer;
-    }
-
-    .search-container button:hover {
-      background: #ccc;
-    }
-
-    .search-container img {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
-    }
-
-    .tacos{
-      position: absolute;
-      top: 250px;
-      left: 5%;
-      width: 90%;
-      max-width: 800px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .tacos img {
-      width: 100%;
-      height: auto;
-    }
-
-    .Encuentranos, .en {
-      position: absolute;
-      top: 500px;
-      width: auto;
-      height: auto;
-      z-index: 1;
-      text-align: right;
-    }
-
-    .Encuentranos {
-      right: 10%;
-    }
-
-    .en {
-      right: 8%;
-    }
-
-    .Didi, .Rappi, .Uber {
-      position: absolute;
-      top: 600px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Didi {
-      right: 17%;
-    }
-
-    .Rappi {
-      right: 10%;
-    }
-
-    .Uber {
-      right: 3%;
-    }
-
-    .Didi img, .Rappi img, .Uber img {
-      width: 100%;
-      height: auto;
-    }
-
-    .Americano, .Capuchino, .Espresso, .Machiatto, .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed {
-      position: absolute;
-      top: 1200px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Americano {
-      left: 10%;
-    }
-
-    .Capuchino {
-      left: 30%;
-    }
-
-    .Espresso {
-      left: 50%;
-    }
-
-    .Machiatto {
-      left: 70%;
-    }
-
-    .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed {
-      position: absolute;
-      top: 1500px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .AztecaRenamed {
-      left: 10%;
-    }
-
-    .FrappeRenamed {
-      left: 30%;
-    }
-
-    .LatteRenamed {
-      left: 50%;
-    }
-
-    .ConlecheRenamed {
-      left: 70%;
-    }
-
-    .slider-box{
-      width: 90%;
-      max-width: 400px;
-      height: 400px;
-      margin: 50px auto 0;
-      overflow: hidden;
-      position: absolute;
-      top: 150px;
-      right: 5%;
-      z-index: 1;
-    }
-
-    .slider-box ul{
-      display: flex;
-      padding: 0;
-      width: 300%;
-      animation: slide 20s infinite alternate ease-in-out;
-    }
-
-    .slider-box li{
-      width: 200%;
-      list-style: none;
-      position: relative;
-    }
-
-    .slider-box img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    @keyframes slide{
-      0% {margin-left: 0;}
-      20% {margin-left: 0;}
-      25% {margin-left: -100%;}
-      45% {margin-left: -100%;}
-      50% {margin-left: -200%;}
-      70% {margin-left: -200%;}
-    }
-
-    .menu {
-      display: none;
-      flex-direction: column;
-      background-color: rgba(51, 51, 51, 0.9);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 2;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .menu a {
-      color: #ffcc00;
-      text-decoration: none;
-      padding: 15px 0;
-      display: block;
-      text-align: center;
-    }
-
-    .menu a:hover {
-      background-color: #575757;
-    }
-
-    .hamburger {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      width: 40px;
-      height: 30px;
-      justify-content: space-between;
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 3;
-      transition: left 0.3s;
-    }
-
-    .line {
-      height: 5px;
-      background-color: #333;
-      width: 100%;
-    }
-
-    .hamburger.open {
-      left: calc(100% - 60px);
-    }
-
-    nav {
-      position: absolute;
-      top: 1000px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 15px;
-      border: 4px solid #928a8a;
-      border-radius: 20px;
-      justify-content: center;
-      max-width: 900px;
-      width: 80vw;
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    }
-
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px;
-      width: 100%;
-    }
-
-    nav li {
-      margin: 0;
-      flex: 1 1 160px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 120px;
-      max-width: 200px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #9b59b6;
-      font-size: 24px;
-      font-family: 'Arial', sans-serif;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #c39bd3;
-    }
-
-    nav a img {
-      width: 100%;
-      max-width: 160px;
-      min-width: 120px;
-      height: auto;
-      border: 2px solid transparent;
-      transition: border 0.3s ease;
-      object-fit: contain;
-      aspect-ratio: 1/1;
-      display: block;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 400px;
-      height: auto;
-      max-height: 80vh;
-      background-color: white;
-      border: 2px solid black;
-      z-index: 1000;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    .modal img {
-      width: 100%;
-      height: auto;
-      max-height: 300px;
-      object-fit: cover;
-    }
-
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    .close {
-      cursor: pointer;
-      color: red;
-      font-size: 24px;
-      font-weight: bold;
-      float: right;
-    }
-   
-    .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas {
-      position: absolute;
-      top: 1200px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Pancakes img, .Omelette img, .Chilaquiles img, .Molletes img, 
-    .Hotcakes img, .Tostadas img, .HuevosRancheros img, .Enchiladas img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-    }
-
-    .Pancakes {
-      left: 10%;
-    }
-
-    .Omelette {
-      left: 30%;
-    }
-
-    .Chilaquiles {
-      left: 50%;
-    }
-
-    .Molletes {
-      left: 70%;
-    }
-
-    .Hotcakes {
-      left: 10%;
-      top: 1500px;
-    }
-
-    .Tostadas {
-      left: 30%;
-      top: 1500px;
-    }
-
-    .HuevosRancheros {
-      left: 50%;
-      top: 1500px;
-    }
-
-    .Enchiladas {
-      left: 70%;
-      top: 1500px;
-    }
-
-    .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos {
-      position: absolute;
-      top: 1200px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Mole img, .Pozole img, .Cochinita img, .Chiles img,
-    .Barbacoa img, .Carnitas img, .Tlayudas img, .Tacos img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-    }
-
-    .Mole {
-      left: 10%;
-    }
-
-    .Pozole {
-      left: 30%;
-    }
-
-    .Cochinita {
-      left: 50%;
-    }
-
-    .Chiles {
-      left: 70%;
-    }
-
-    .Barbacoa {
-      left: 10%;
-      top: 1500px;
-    }
-
-    .Carnitas {
-      left: 30%;
-      top: 1500px;
-    }
-
-    .Tlayudas {
-      left: 50%;
-      top: 1500px;
-    }
-
-    .Tacos {
-      left: 70%;
-      top: 1500px;
-    }
-
-    .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8 {
-      position: absolute;
-      top: 1200px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Cena1 img, .Cena2 img, .Cena3 img, .Cena4 img,
-    .Cena5 img, .Cena6 img, .Cena7 img, .Cena8 img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-    }
-
-    .Cena1 {
-      left: 10%;
-    }
-
-    .Cena2 {
-      left: 30%;
-    }
-
-    .Cena3 {
-      left: 50%;
-    }
-
-    .Cena4 {
-      left: 70%;
-    }
-
-    .Cena5 {
-      left: 10%;
-      top: 1500px;
-    }
-
-    .Cena6 {
-      left: 30%;
-      top: 1500px;
-    }
-
-    .Cena7 {
-      left: 50%;
-      top: 1500px;
-    }
-
-    .Cena8 {
-      left: 70%;
-      top: 1500px;
-    }
-
-    .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8 {
-      position: absolute;
-      top: 1200px;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .Postre1 img, .Postre2 img, .Postre3 img, .Postre4 img,
-    .Postre5 img, .Postre6 img, .Postre7 img, .Postre8 img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-    }
-
-    .Postre1 {
-      left: 10%;
-    }
-
-    .Postre2 {
-      left: 30%;
-    }
-
-    .Postre3 {
-      left: 50%;
-    }
-
-    .Postre4 {
-      left: 70%;
-    }
-
-    .Postre5 {
-      left: 10%;
-      top: 1500px;
-    }
-
-    .Postre6 {
-      left: 30%;
-      top: 1500px;
-    }
-
-    .Postre7 {
-      left: 50%;
-      top: 1500px;
-    }
-
-    .Postre8 {
-      left: 70%;
-      top: 1500px;
-    }
-
-    .side-panel {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 300px;
-      height: 100%;
-      background-color: #f4f4f4;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      box-sizing: border-box;
-      transition: right 0.3s ease;
-      z-index: 1001;
-      overflow-y: auto;
-    }
-
-    .side-panel.open {
-      right: 0;
-    }
-
-    .side-panel h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .side-panel p {
-      margin: 10px 0;
-    }
-
-    .side-panel input[type="number"],
-    .side-panel input[type="text"] {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .side-panel label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .side-panel button {
-      width: 100%;
-      padding: 10px;
-      background-color: #05b517;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
-
-    .side-panel button:hover {
-      background-color: #04a314;
-    }
-
-    #desayunos-section, #bebidas-section, #comidas-section, #cenas-section, #postres-section {
-      width: 100%;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-
-    #especialidades-section {
-      text-align: center;
-      margin: 50px 0;
-      padding: 20px;
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-
-    #especialidades-section h2 {
-      font-size: 28px;
-      font-family: Arial, sans-serif;
-      color: #c90e06;
-      margin-top: 800px;
-      margin-bottom: 30px;
-    }
-
-    .especialidades-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
-      gap: 40px;
-      justify-content: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .especialidades-grid img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .menu-title {
-      text-align: center;
-      font-size: 36px;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 850px 0 20px;
-      letter-spacing: 0.15em;
-      color: #c90e06;
-      text-shadow: 1px 1px 2px #fff;
-    }
-
-    /* MEDIA QUERIES */
-    
-    /* Tablets y pantallas medianas */
-    @media (max-width: 1200px) {
-      .slider-box {
-        max-width: 90vw;
-        height: 250px;
+    <title>Platin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      nav {
-        max-width: 90vw;
-        width: 90vw;
-        padding: 12px;
+      html, body {
+        width: 100%;
+        overflow-x: hidden;
       }
 
-      nav ul {
-        gap: 18px;
-      }
-
-      nav li {
-        min-width: 80px;
-        max-width: 120px;
-      }
-
-      nav a img {
-        max-width: 100px;
-        min-width: 80px;
-      }
-    }
-
-    /* Tablets pequeñas */
-    @media (max-width: 900px) {
-      .header h1 {
-        font-size: 20px;
-      }
-
-      .tacos {
-        top: 180px;
-        left: 2.5%;
-        width: 95%;
-      }
-
-      .slider-box {
-        top: 100px;
-        max-width: 95vw;
-        height: 180px;
-        right: 2.5%;
-      }
-
-      .Logo {
-        top: 10px;
-        right: 10px;
-        width: 100px;
-      }
-
-      .search-container {
-        top: 10%;
-        left: 10px;
-        padding: 8px;
-        max-width: calc(100% - 130px);
-      }
-
-      .search-container input[type=text] {
-        width: 120px;
-        font-size: 14px;
-      }
-
-      .search-container img {
-        width: 30px;
-        height: 30px;
-      }
-
-      .Encuentranos, .en {
-        top: 350px;
-        right: 5%;
-        font-size: 18px;
-      }
-
-      .Didi, .Rappi, .Uber {
-        top: 420px;
-        width: 70px;
-      }
-
-      .Didi {
-        right: 20%;
-      }
-
-      .Rappi {
-        right: 11%;
-      }
-
-      .Uber {
-        right: 2%;
-      }
-
-      .Americano, .Capuchino, .Espresso, .Machiatto,
-      .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed,
-      .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas,
-      .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos,
-      .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8,
-      .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8 {
-        width: 70px;
-        top: 700px !important;
-      }
-
-      .Americano, .Pancakes, .Mole, .Cena1, .Postre1 { left: 5%; }
-      .Capuchino, .Omelette, .Pozole, .Cena2, .Postre2 { left: 28%; }
-      .Espresso, .Chilaquiles, .Cochinita, .Cena3, .Postre3 { left: 51%; }
-      .Machiatto, .Molletes, .Chiles, .Cena4, .Postre4 { left: 74%; }
-      .AztecaRenamed, .Hotcakes, .Barbacoa, .Cena5, .Postre5 { left: 5%; top: 800px !important; }
-      .FrappeRenamed, .Tostadas, .Carnitas, .Cena6, .Postre6 { left: 28%; top: 800px !important; }
-      .LatteRenamed, .HuevosRancheros, .Tlayudas, .Cena7, .Postre7 { left: 51%; top: 800px !important; }
-      .ConlecheRenamed, .Enchiladas, .Tacos, .Cena8, .Postre8 { left: 74%; top: 800px !important; }
-
-      nav {
-        top: 600px;
-        padding: 8px;
-      }
-
-      nav a {
-        font-size: 18px;
-      }
-
-      .menu-title {
-        margin-top: 650px;
-        font-size: 28px;
-      }
-
-      #especialidades-section h2 {
-        margin-top: 600px;
-      }
-    }
-
-    /* Móviles */
-    @media (max-width: 600px) {
       body {
-        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
       }
 
+      /* ===== HEADER ===== */
       .header {
-        height: 40px;
-        padding: 8px 0;
+        background-color: #c90e06;
+        color: white;
+        padding: clamp(10px, 3vw, 20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        gap: 20px;
+        flex-wrap: wrap;
       }
 
       .header h1 {
-        font-size: 18px;
+        font-size: clamp(18px, 5vw, 36px);
+        margin: 0;
       }
 
       .Logo {
-        width: 70px;
-        top: 8px;
-        right: 8px;
+        position: absolute;
+        right: clamp(10px, 3vw, 20px);
+        top: 50%;
+        transform: translateY(-50%);
+        width: clamp(50px, 10vw, 120px);
+        height: auto;
       }
 
-      .hamburger {
-        width: 35px;
-        height: 28px;
-        top: 10px;
-        left: 10px;
-      }
-
-      .line {
-        height: 4px;
+      .Logo img {
+        width: 100%;
+        height: auto;
       }
 
       .search-container {
-        top: 60px;
-        left: 5px;
-        right: 5px;
-        width: calc(100% - 10px);
-        max-width: none;
-        padding: 8px;
-        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        background-color: #05b517;
+        padding: clamp(8px, 2vw, 12px);
+        border-radius: 30px;
+        gap: 8px;
+        flex: 0 1 auto;
       }
 
       .search-container input[type=text] {
-        width: calc(100% - 60px);
-        font-size: 14px;
-        padding: 8px;
+        border: none;
+        padding: clamp(6px, 1.5vw, 10px);
+        border-radius: 20px;
+        font-size: clamp(12px, 2vw, 14px);
+        width: clamp(100px, 20vw, 200px);
+        outline: none;
       }
 
-      .search-container img {
+      .search-container button {
+        background: #ddd;
+        border: none;
+        border-radius: 50%;
         width: 30px;
         height: 30px;
-        left: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .search-container button:hover {
+        background: #ccc;
+      }
+
+      /* ===== BANNER SECTION ===== */
+      .banner-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: center;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
       }
 
       .tacos {
-        top: 120px;
-        left: 0;
         width: 100%;
+        height: auto;
+      }
+
+      .tacos img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
       }
 
       .slider-box {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: 20px auto;
-        max-width: 95%;
-        height: 150px;
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border-radius: 10px;
       }
 
-      .Encuentranos, .en {
-        top: 200px;
-        right: 5%;
-        font-size: 16px;
+      .slider-box ul {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        animation: slide 20s infinite alternate ease-in-out;
+        list-style: none;
       }
 
-      .Didi, .Rappi, .Uber {
-        top: 250px;
-        width: 50px;
+      .slider-box li {
+        width: 33.33%;
+        height: 100%;
       }
 
-      .Didi {
-        right: 25%;
+      .slider-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
-      .Rappi {
-        right: 12%;
+      @keyframes slide {
+        0%, 20% { margin-left: 0; }
+        25%, 45% { margin-left: -100%; }
+        50%, 70% { margin-left: -200%; }
       }
 
-      .Uber {
-        right: 2%;
+      /* ===== DELIVERY SECTION ===== */
+      .delivery-section {
+        text-align: center;
+        padding: clamp(15px, 3vw, 25px);
+        background-color: #fff;
       }
 
-      .menu-title {
-        margin-top: 350px;
-        font-size: 24px;
+      .delivery-section h3 {
+        font-size: clamp(16px, 4vw, 24px);
+        margin-bottom: 15px;
+        color: #333;
       }
 
-      nav {
-        top: 400px;
+      .delivery-logos {
+        display: flex;
+        justify-content: center;
+        gap: clamp(15px, 4vw, 30px);
+        flex-wrap: wrap;
+      }
+
+      .delivery-logos a {
+        width: clamp(60px, 12vw, 120px);
+        height: auto;
+        transition: transform 0.3s;
+      }
+
+      .delivery-logos a:hover {
+        transform: scale(1.05);
+      }
+
+      .delivery-logos img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* ===== HAMBURGER MENU ===== */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 999;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .hamburger span {
+        width: 30px;
+        height: 3px;
+        background-color: #333;
+        transition: 0.3s;
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+      }
+
+      /* ===== MENU ===== */
+      .menu {
+        display: none;
+        position: fixed;
+        top: 0;
         left: 0;
-        transform: none;
-        width: 100%;
-        padding: 8px;
-        border-width: 2px;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 998;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 40px 20px;
       }
 
-      nav ul {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 10px;
-        justify-content: flex-start;
-        padding: 8px;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      nav li {
-        flex: 0 0 auto;
-        min-width: 70px;
-        max-width: 90px;
-      }
-
-      nav a img {
-        max-width: 70px;
-        min-width: 60px;
-      }
-
-      .Americano, .Capuchino, .Espresso, .Machiatto,
-      .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed,
-      .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas,
-      .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos,
-      .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8,
-      .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8 {
-        width: 50px;
-        top: 500px !important;
-      }
-
-      .Americano, .Pancakes, .Mole, .Cena1, .Postre1 { left: 6%; }
-      .Capuchino, .Omelette, .Pozole, .Cena2, .Postre2 { left: 29%; }
-      .Espresso, .Chilaquiles, .Cochinita, .Cena3, .Postre3 { left: 52%; }
-      .Machiatto, .Molletes, .Chiles, .Cena4, .Postre4 { left: 75%; }
-      .AztecaRenamed, .Hotcakes, .Barbacoa, .Cena5, .Postre5 { left: 6%; top: 570px !important; }
-      .FrappeRenamed, .Tostadas, .Carnitas, .Cena6, .Postre6 { left: 29%; top: 570px !important; }
-      .LatteRenamed, .HuevosRancheros, .Tlayudas, .Cena7, .Postre7 { left: 52%; top: 570px !important; }
-      .ConlecheRenamed, .Enchiladas, .Tacos, .Cena8, .Postre8 { left: 75%; top: 570px !important; }
-
-      .side-panel {
-        width: 100%;
-        right: -100%;
-        padding: 15px;
-      }
-
-      .side-panel.open {
-        right: 0;
-      }
-
-      .side-panel h2 {
-        font-size: 18px;
-      }
-
-      .side-panel button {
-        padding: 12px;
-        font-size: 16px;
-      }
-
-      .modal {
-        width: 95%;
-        max-width: 95%;
-        padding: 15px;
-        max-height: 85vh;
-      }
-
-      .modal h2 {
-        font-size: 18px;
-        margin: 10px 0;
-      }
-
-      .modal p {
-        font-size: 14px;
-      }
-
-      .close {
-        font-size: 28px;
-      }
-
-      #especialidades-section {
-        margin: 30px 0;
-        padding: 10px;
-      }
-
-      #especialidades-section h2 {
-        margin-top: 400px;
-        font-size: 22px;
-      }
-
-      .especialidades-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+      .menu.active {
+        display: flex;
       }
 
       .menu a {
-        font-size: 18px;
-        padding: 12px 0;
-      }
-    }
-
-    /* Móviles muy pequeños */
-    @media (max-width: 400px) {
-      .header h1 {
-        font-size: 16px;
+        color: #ffcc00;
+        text-decoration: none;
+        font-size: clamp(18px, 5vw, 28px);
+        text-align: center;
       }
 
-      .Logo {
-        width: 60px;
+      .menu a:hover {
+        color: #fff;
+      }
+
+      /* ===== NAVIGATION ===== */
+      nav {
+        background-color: #fff;
+        padding: clamp(15px, 3vw, 25px);
+        border: 3px solid #928a8a;
+        border-radius: 15px;
+        margin: 30px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
 
       nav ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: clamp(10px, 3vw, 20px);
+        list-style: none;
+        justify-items: center;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #9b59b6;
+        font-weight: bold;
+        font-size: clamp(12px, 2vw, 16px);
+        transition: color 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 8px;
       }
 
-      nav li {
-        min-width: 60px;
-        max-width: 80px;
+      nav a:hover {
+        color: #c39bd3;
       }
 
-      nav a img {
-        max-width: 60px;
-        min-width: 50px;
+      nav img {
+        width: clamp(70px, 12vw, 140px);
+        height: auto;
+        display: block;
       }
 
-      .Americano, .Capuchino, .Espresso, .Machiatto,
-      .AztecaRenamed, .FrappeRenamed, .LatteRenamed, .ConlecheRenamed,
-      .Pancakes, .Omelette, .Chilaquiles, .Molletes, .Hotcakes, .Tostadas, .HuevosRancheros, .Enchiladas,
-      .Mole, .Pozole, .Cochinita, .Chiles, .Barbacoa, .Carnitas, .Tlayudas, .Tacos,
-      .Cena1, .Cena2, .Cena3, .Cena4, .Cena5, .Cena6, .Cena7, .Cena8,
-      .Postre1, .Postre2, .Postre3, .Postre4, .Postre5, .Postre6, .Postre7, .Postre8 {
-        width: 45px;
-      }
-
+      /* ===== MENU TITLE ===== */
       .menu-title {
-        font-size: 20px;
+        text-align: center;
+        font-size: clamp(20px, 5vw, 32px);
+        color: #c90e06;
+        margin: 30px 0;
+      }
+
+      /* ===== PRODUCTS GRID ===== */
+      .products-section {
+        display: none;
+        width: 100%;
+        padding: clamp(15px, 3vw, 25px);
+        box-sizing: border-box;
+      }
+
+      .products-section.active {
+        display: block;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: clamp(15px, 3vw, 30px);
+        max-width: 1400px;
+        margin: 0 auto;
+        justify-items: center;
+      }
+
+      .product-item {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .product-item img {
+        width: clamp(70px, 15vw, 150px);
+        height: auto;
+        cursor: pointer;
+        transition: transform 0.3s;
+        border-radius: 8px;
+      }
+
+      .product-item img:hover {
+        transform: scale(1.08);
+      }
+
+      /* ===== ESPECIALIDADES ===== */
+      #especialidades-section {
+        text-align: center;
+        padding: clamp(20px, 4vw, 40px);
+        background-color: #fff;
       }
 
       #especialidades-section h2 {
-        font-size: 20px;
+        font-size: clamp(20px, 5vw, 32px);
+        color: #c90e06;
+        margin-bottom: 25px;
       }
-    }
+
+      .especialidades-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: clamp(15px, 3vw, 30px);
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .especialidades-grid img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .especialidades-grid img:hover {
+        transform: scale(1.05);
+      }
+
+      /* ===== MODAL ===== */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+      }
+
+      .modal-overlay.active {
+        display: block;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 10px;
+        padding: clamp(15px, 4vw, 30px);
+        max-width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        z-index: 1001;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      }
+
+      .modal.active {
+        display: block;
+      }
+
+      .modal img {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+
+      .modal h2 {
+        font-size: clamp(18px, 4vw, 24px);
+        color: #c90e06;
+        margin: 15px 0;
+      }
+
+      .modal p {
+        font-size: clamp(13px, 2vw, 16px);
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .close {
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        color: #c90e06;
+        cursor: pointer;
+        line-height: 1;
+      }
+
+      .close:hover {
+        color: #a00;
+      }
+
+      /* ===== SIDE PANEL ===== */
+      .side-panel {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        max-width: 350px;
+        height: 100%;
+        background-color: #f4f4f4;
+        transform: translateX(100%);
+        transition: transform 0.3s;
+        padding: clamp(15px, 3vw, 25px);
+        box-sizing: border-box;
+        overflow-y: auto;
+        z-index: 1002;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+      }
+
+      .side-panel.active {
+        transform: translateX(0);
+      }
+
+      .side-panel h2 {
+        font-size: clamp(16px, 3vw, 20px);
+        color: #c90e06;
+        margin-bottom: 10px;
+      }
+
+      .side-panel p {
+        font-size: clamp(13px, 2vw, 14px);
+        margin: 8px 0;
+      }
+
+      .side-panel label {
+        display: block;
+        font-weight: bold;
+        margin-top: 12px;
+        font-size: clamp(12px, 2vw, 14px);
+      }
+
+      .side-panel input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      .side-panel button {
+        width: 100%;
+        padding: clamp(10px, 2vw, 14px);
+        background-color: #05b517;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+      }
+
+      .side-panel button:hover {
+        background-color: #04a314;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1200px) {
+        .banner-section {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        }
+
+        .especialidades-grid {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+
+        .banner-section {
+          padding: 15px;
+          gap: 15px;
+        }
+
+        nav {
+          margin: 20px 15px;
+          padding: 12px;
+        }
+
+        nav ul {
+          grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+          gap: 10px;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+          gap: 12px;
+          padding: 15px;
+        }
+
+        .side-panel {
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header {
+          flex-direction: column;
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .Logo {
+          position: static;
+          transform: none;
+          width: 60px;
+          margin: 0 auto;
+        }
+
+        .search-container {
+          width: 100%;
+        }
+
+        .banner-section {
+          padding: 10px;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          padding: 10px;
+        }
+
+        nav {
+          margin: 15px 10px;
+          padding: 10px;
+        }
+
+        nav ul {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .menu-title {
+          font-size: 20px;
+          margin: 20px 0;
+        }
+
+        .especialidades-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+
+        .modal {
+          width: 95%;
+          padding: 15px;
+        }
+      }
     </style>
 </head>
-<body class="body"> 
+<body>
+    <!-- HEADER -->
     <div class="header">
         <h1>Platin</h1>
-    </div>
-        
-    <div class="Logo">
-      <img src="Imagenes/LogoF.png" alt="FoodTech">
-    </div>
-        
-    <div class="search-container">
-      <input type="text" placeholder="Buscar..." name="search">
-      <img src="Imagenes/Lupav.jpg" alt="Icono de búsqueda">
+        <div class="Logo">
+          <img src="Imagenes/LogoF.png" alt="Platin Logo">
+        </div>
+        <div class="search-container">
+          <input type="text" placeholder="Buscar...">
+          <button>🔍</button>
+        </div>
     </div>
 
-    <div class="tacos">
-      <img src="Imagenes/Tacos.png" alt="Tacos">
-    </div>
+    <!-- HAMBURGER MENU -->
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <div class="slider-box">
-      <ul>
-        <li><img src="Imagenes/Ensalada.jpeg" alt=""></li>
-        <li><img src="Imagenes/Hamburguesa.jpeg" alt=""></li>
-        <li><img src="Imagenes/Sushi.jpeg" alt=""></li>
-      </ul>
-    </div>
-    
-    <div class="Encuentranos">
-      <h3>Encuentranos</h3>
-    </div>
-    <div class="en">
-      <h3>en</h3>
-    </div>
-
-    <div class="Didi">
-      <a href="https://www.didi-food.com/es-419/food/">
-        <img src="Imagenes/DidiFood.png" alt="Didi">
-      </a>
-    </div>
-
-    <div class="Rappi">
-      <a href="https://www.rappi.com.mx/">
-        <img src="Imagenes/Rappi.jpeg" alt="Rappi">
-      </a>
-    </div>
-
-    <div class="Uber">
-      <a href="https://www.ubereats.com/mx">
-        <img src="Imagenes/UberEats.png" alt="Uber">
-      </a>
-    </div>
-
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-
+    <!-- MENU MOBILE -->
     <div class="menu" id="menu">
-      <a href="#home">Ubicación</a>
-      <a href="#about">Teléfono</a>
-      <a href="#services">Reservaciones</a>
-      <a href="#contact">Sugerencias</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#telefono">Teléfono</a>
+      <a href="#reservaciones">Reservaciones</a>
+      <a href="#sugerencias">Sugerencias</a>
     </div>
 
+    <!-- BANNER SECTION -->
+    <div class="banner-section">
+      <div class="tacos">
+        <img src="Imagenes/Tacos.png" alt="Tacos Banner">
+      </div>
+      <div class="slider-box">
+        <ul>
+          <li><img src="Imagenes/Ensalada.jpeg" alt="Ensalada"></li>
+          <li><img src="Imagenes/Hamburguesa.jpeg" alt="Hamburguesa"></li>
+          <li><img src="Imagenes/Sushi.jpeg" alt="Sushi"></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DELIVERY SECTION -->
+    <div class="delivery-section">
+      <h3>Encuéntranos en</h3>
+      <div class="delivery-logos">
+        <a href="https://www.didi-food.com/es-419/food/" target="_blank">
+          <img src="Imagenes/DidiFood.png" alt="Didi">
+        </a>
+        <a href="https://www.rappi.com.mx/" target="_blank">
+          <img src="Imagenes/Rappi.jpeg" alt="Rappi">
+        </a>
+        <a href="https://www.ubereats.com/mx" target="_blank">
+          <img src="Imagenes/UberEats.png" alt="Uber">
+        </a>
+      </div>
+    </div>
+
+    <!-- SIDE PANEL -->
     <div class="side-panel" id="sidePanel">
       <h2 id="productName">Producto</h2>
       <p id="productPrice">Precio: $0.00</p>
@@ -1170,6 +678,7 @@
 
     <h2 class="menu-title">Menú</h2>
 
+    <!-- NAVIGATION -->
     <nav>
       <ul>
         <li><a href="#desayunos"><img src="Imagenes/Desayunos.png" alt="Desayunos"></a></li>
@@ -1180,170 +689,211 @@
       </ul>
     </nav>
 
-    <!-- SECCIÓN DESAYUNOS -->
-    <div id="desayunos-section" style="display: inline-block;">
-      <div class="Pancakes">
-        <img src="Imagenes/Pancakes.png" alt="Pancakes" id="myImagePancakes">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPancakes"></div>
-      <div class="modal" id="myModalPancakes">
-        <span class="close" id="closeModalPostre3">&times;</span>
-        <img src="Imagenes/Paymango.png" alt="Pay de Mango">
-        <h2>Pay de Mango</h2>
-        <p>Un pay tropical con base de galleta, relleno de crema de mango y decorado con trozos de fruta.</p>
-      </div>
+    <!-- PRODUCTS SECTIONS -->
+    <div id="desayunos-section" class="products-section active">
+      <div class="products-grid" id="desayunosGrid"></div>
+    </div>
 
-      <div class="Postre4">
-        <img src="Imagenes/Gelatina.png" alt="Gelatina de Chocolate" id="myImagePostre4">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre4"></div>
-      <div class="modal" id="myModalPostre4">
-        <span class="close" id="closeModalPostre4">&times;</span>
-        <img src="Imagenes/Gelatina.png" alt="Gelatina de Chocolate">
-        <h2>Gelatina de Chocolate</h2>
-        <p>Una gelatina cremosa con sabor a chocolate, perfecta para los amantes del cacao.</p>
-      </div>
+    <div id="bebidas-section" class="products-section">
+      <div class="products-grid" id="bebidasGrid"></div>
+    </div>
 
-      <div class="Postre5">
-        <img src="Imagenes/Brownie.png" alt="Brownie" id="myImagePostre5">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre5"></div>
-      <div class="modal" id="myModalPostre5">
-        <span class="close" id="closeModalPostre5">&times;</span>
-        <img src="Imagenes/Brownie.png" alt="Brownie">
-        <h2>Brownie</h2>
-        <p>Un postre clásico de chocolate, con una textura suave y un sabor intenso.</p>
-      </div>
+    <div id="comidas-section" class="products-section">
+      <div class="products-grid" id="comidasGrid"></div>
+    </div>
 
-      <div class="Postre6">
-        <img src="Imagenes/Pastel.png" alt="Pastel de Chocolate" id="myImagePostre6">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre6"></div>
-      <div class="modal" id="myModalPostre6">
-        <span class="close" id="closeModalPostre6">&times;</span>
-        <img src="Imagenes/Pastel.png" alt="Pastel de Chocolate">
-        <h2>Pastel de Chocolate</h2>
-        <p>Un pastel esponjoso y húmedo, cubierto con una rica crema de chocolate.</p>
-      </div>
+    <div id="cenas-section" class="products-section">
+      <div class="products-grid" id="cenasGrid"></div>
+    </div>
 
-      <div class="Postre7">
-        <img src="Imagenes/Tiramisu.png" alt="Tiramisú" id="myImagePostre7">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre7"></div>
-      <div class="modal" id="myModalPostre7">
-        <span class="close" id="closeModalPostre7">&times;</span>
-        <img src="Imagenes/Tiramisu.png" alt="Tiramisú">
-        <h2>Tiramisú</h2>
-        <p>Un postre italiano con capas de bizcocho, café, crema de mascarpone y cacao.</p>
-      </div>
-
-      <div class="Postre8">
-        <img src="Imagenes/Carlota.png" alt="Carlota de Durazno" id="myImagePostre8">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre8"></div>
-      <div class="modal" id="myModalPostre8">
-        <span class="close" id="closeModalPostre8">&times;</span>
-        <img src="Imagenes/Carlota.png" alt="Carlota de Durazno">
-        <h2>Carlota de Durazno</h2>
-        <p>Un postre frío con capas de galleta, crema y duraznos frescos.</p>
-      </div>
+    <div id="postres-section" class="products-section">
+      <div class="products-grid" id="postresGrid"></div>
     </div>
 
     <!-- ESPECIALIDADES DE LA CASA -->
     <div id="especialidades-section">
       <h2>Especialidades de la Casa</h2>
       <div class="especialidades-grid">
-        <div><img src="Imagenes/Pizzas.png" alt="Pizzas"></div>
-        <div><img src="Imagenes/Tacos3.png" alt="Tacos"></div>
-        <div><img src="Imagenes/Lasagna.png" alt="Lasagna"></div>
-        <div><img src="Imagenes/Cremas.png" alt="Cremas"></div>
-        <div><img src="Imagenes/Paella.png" alt="Paella"></div>
-        <div><img src="Imagenes/Pastas.png" alt="Pastas"></div>
+        <img src="Imagenes/Pizzas.png" alt="Pizzas">
+        <img src="Imagenes/Tacos3.png" alt="Tacos">
+        <img src="Imagenes/Lasagna.png" alt="Lasagna">
+        <img src="Imagenes/Cremas.png" alt="Cremas">
+        <img src="Imagenes/Paella.png" alt="Paella">
+        <img src="Imagenes/Pastas.png" alt="Pastas">
       </div>
     </div>
 
     <script>
-      function toggleMenu() {
-        const menu = document.getElementById('menu');
-        const hamburger = document.getElementById('hamburger');
-        const isOpen = menu.style.display === 'flex';
-        menu.style.display = isOpen ? 'none' : 'flex';
-        hamburger.classList.toggle('open', !isOpen);
-      }
-
-      function closeMenu() {
-        const menu = document.getElementById('menu');
-        const hamburger = document.getElementById('hamburger');
-        menu.style.display = 'none';
-        hamburger.classList.remove('open');
-      }
-
-      function scrollToElement(elementId) {
-        const element = document.getElementById(elementId);
-        if (element) {
-          window.scrollTo({
-            top: element.offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      }
-
-      const PRODUCT_IDS = {
-        'Café Americano': 'B001',
-        'Café Capuchino': 'B002',
-        'Café Espresso': 'B003',
-        'Café Machiatto': 'B004',
-        'Café Azteca': 'B005',
-        'Café Frappe': 'B006',
-        'Café Latte': 'B007',
-        'Café Con Leche': 'B008',
-        'Pancakes': 'D001',
-        'Omelette': 'D002',
-        'Chilaquiles': 'D003',
-        'Molletes': 'D004',
-        'Hotcakes': 'D005',
-        'Tostadas': 'D006',
-        'Huevos Rancheros': 'D007',
-        'Enchiladas': 'D008',
-        'Mole': 'C001',
-        'Pozole': 'C002',
-        'Cochinita Pibil': 'C003',
-        'Chiles en Nogada': 'C004',
-        'Barbacoa': 'C005',
-        'Carnitas': 'C006',
-        'Tlayudas': 'C007',
-        'Tacos': 'C008',
-        'Ensalada mediterránea': 'CN001',
-        'Ensalada César con pollo': 'CN002',
-        'Crema de calabaza': 'CN003',
-        'Fideos chinos con pollo y verduras': 'CN004',
-        'Espaguetis con queso y pimienta negra': 'CN005',
-        'Macarrones con berenjenas y tomate': 'CN006',
-        'Huevos revueltos': 'CN007',
-        'Muslos de pollo': 'CN008',
-        'Pay de Limón': 'P001',
-        'Flan Napolitano': 'P002',
-        'Pay de Mango': 'P003',
-        'Gelatina de Chocolate': 'P004',
-        'Brownie': 'P005',
-        'Pastel de Chocolate': 'P006',
-        'Tiramisú': 'P007',
-        'Carlota de Durazno': 'P008'
+      // ===== PRODUCTS DATA =====
+      const PRODUCTS = {
+        desayunos: [
+          { id: 'pancakes', name: 'Pancakes', price: '50.00', img: 'Imagenes/Pancakes.png' },
+          { id: 'omelette', name: 'Omelette', price: '60.00', img: 'Imagenes/Omelette.png' },
+          { id: 'chilaquiles', name: 'Chilaquiles', price: '70.00', img: 'Imagenes/Chilaquiles.png' },
+          { id: 'molletes', name: 'Molletes', price: '55.00', img: 'Imagenes/Molletes.png' },
+          { id: 'hotcakes', name: 'Wafles', price: '50.00', img: 'Imagenes/Wafles.png' },
+          { id: 'tostadas', name: 'Tostadas', price: '45.00', img: 'Imagenes/Tostadas.png' },
+          { id: 'huevos-rancheros', name: 'Huevos Rancheros', price: '65.00', img: 'Imagenes/Huevosranch.png' },
+          { id: 'enchiladas', name: 'Enchiladas', price: '75.00', img: 'Imagenes/Enchiladas.png' }
+        ],
+        bebidas: [
+          { id: 'americano', name: 'Café Americano', price: '25.00', img: 'Imagenes/Americano.png' },
+          { id: 'capuchino', name: 'Café Capuchino', price: '30.00', img: 'Imagenes/Capuchino.png' },
+          { id: 'espresso', name: 'Café Espresso', price: '20.00', img: 'Imagenes/Espresso.png' },
+          { id: 'machiatto', name: 'Café Machiatto', price: '35.00', img: 'Imagenes/Machiatto.png' },
+          { id: 'azteca', name: 'Café Azteca', price: '40.00', img: 'Imagenes/Azteca.png' },
+          { id: 'frappe', name: 'Café Frappe', price: '45.00', img: 'Imagenes/Frappe.png' },
+          { id: 'latte', name: 'Café Latte', price: '50.00', img: 'Imagenes/Latte.png' },
+          { id: 'conleche', name: 'Café Con Leche', price: '55.00', img: 'Imagenes/conleche.png' }
+        ],
+        comidas: [
+          { id: 'mole', name: 'Mole', price: '120.00', img: 'Imagenes/Mole.png' },
+          { id: 'pozole', name: 'Pozole', price: '110.00', img: 'Imagenes/Pozole.png' },
+          { id: 'cochinita', name: 'Cochinita Pibil', price: '130.00', img: 'Imagenes/Cochinita.png' },
+          { id: 'chiles', name: 'Chiles en Nogada', price: '140.00', img: 'Imagenes/Chiles.png' },
+          { id: 'barbacoa', name: 'Barbacoa', price: '150.00', img: 'Imagenes/Barbacoa.png' },
+          { id: 'carnitas', name: 'Carnitas', price: '125.00', img: 'Imagenes/Carnitas.png' },
+          { id: 'tlayudas', name: 'Tlayudas', price: '135.00', img: 'Imagenes/Tlayudas.png' },
+          { id: 'tacos', name: 'Tacos', price: '100.00', img: 'Imagenes/Tacos (2).png' }
+        ],
+        cenas: [
+          { id: 'ensalada-med', name: 'Ensalada mediterránea', price: '80.00', img: 'Imagenes/Ensalada.png' },
+          { id: 'ensalada-cesar', name: 'Ensalada César con pollo', price: '85.00', img: 'Imagenes/cesar.png' },
+          { id: 'crema-calabaza', name: 'Crema de calabaza', price: '90.00', img: 'Imagenes/Crema.png' },
+          { id: 'fideos-chinos', name: 'Fideos chinos con pollo y verduras', price: '95.00', img: 'Imagenes/Fideos.png' },
+          { id: 'espaguetis', name: 'Espaguetis con queso y pimienta negra', price: '100.00', img: 'Imagenes/Espaguetis.png' },
+          { id: 'macarrones', name: 'Macarrones con berenjenas y tomate', price: '105.00', img: 'Imagenes/Macarrones.png' },
+          { id: 'huevos-revueltos', name: 'Huevos revueltos', price: '110.00', img: 'Imagenes/Huevos.png' },
+          { id: 'muslos-pollo', name: 'Muslos de pollo', price: '115.00', img: 'Imagenes/Muslos.png' }
+        ],
+        postres: [
+          { id: 'pay-limon', name: 'Pay de Limón', price: '40.00', img: 'Imagenes/Pay.png' },
+          { id: 'flan', name: 'Flan Napolitano', price: '45.00', img: 'Imagenes/Flan.png' },
+          { id: 'pay-mango', name: 'Pay de Mango', price: '50.00', img: 'Imagenes/Paymango.png' },
+          { id: 'gelatina', name: 'Gelatina de Chocolate', price: '35.00', img: 'Imagenes/Gelatina.png' },
+          { id: 'brownie', name: 'Brownie', price: '55.00', img: 'Imagenes/Brownie.png' },
+          { id: 'pastel', name: 'Pastel de Chocolate', price: '60.00', img: 'Imagenes/Pastel.png' },
+          { id: 'tiramisu', name: 'Tiramisú', price: '70.00', img: 'Imagenes/Tiramisu.png' },
+          { id: 'carlota', name: 'Carlota de Durazno', price: '65.00', img: 'Imagenes/Carlota.png' }
+        ]
       };
 
-      function openSidePanel(productName, productPrice) {
-        const sidePanel = document.getElementById('sidePanel');
-        document.getElementById('productName').textContent = productName;
-        document.getElementById('productPrice').textContent = `Precio: ${productPrice}`;
-        document.getElementById('productId').value = PRODUCT_IDS[productName] || '';
-        sidePanel.classList.add('open');
+      const PRODUCT_DESCRIPTIONS = {
+        'Pancakes': 'Deliciosos pancakes con miel y frutas frescas.',
+        'Omelette': 'Omelette de queso y jamón con una guarnición de ensalada.',
+        'Chilaquiles': 'Chilaquiles verdes o rojos con pollo y crema.',
+        'Molletes': 'Molletes con frijoles, queso y pico de gallo.',
+        'Wafles': 'Wafles con mantequilla y miel de maple.',
+        'Tostadas': 'Tostadas con aguacate, huevo y queso fresco.',
+        'Huevos Rancheros': 'Huevos estrellados sobre tortilla con salsa ranchera.',
+        'Enchiladas': 'Enchiladas verdes o rojas rellenas de pollo y cubiertas con queso y crema.',
+        'Café Americano': 'Es una bebida de café que combina partes iguales de espresso, leche vaporizada y espuma de leche.',
+        'Café Capuchino': 'Compuesto por café tostado y molido y agua caliente.',
+        'Café Espresso': 'Es un café concentrado que se prepara forzando agua caliente a través de café finamente molido.',
+        'Café Machiatto': 'Es un espresso manchado o marcado con una pequeña cantidad de leche, ya sea vaporizada o espumosa.',
+        'Café Azteca': 'Es un café especial con un toque de chocolate y especias.',
+        'Café Frappe': 'Es una bebida fría y espumosa, generalmente hecha con café instantáneo, agua, azúcar y hielo.',
+        'Café Latte': 'Es una bebida tradicional que combina café con especias como canela y chocolate.',
+        'Café Con Leche': 'Es una bebida simple que consiste en café negro y leche caliente en partes iguales o en proporciones ajustadas al gusto.',
+        'Mole': 'Un platillo tradicional mexicano hecho con una mezcla de chiles, especias y chocolate.',
+        'Pozole': 'Un caldo tradicional preparado con maíz, carne y acompañado de lechuga, rábanos y limón.',
+        'Cochinita Pibil': 'Carne de cerdo marinada en achiote y jugo de naranja, cocida lentamente y servida con tortillas.',
+        'Chiles en Nogada': 'Chiles poblanos rellenos de carne y frutas, bañados en una salsa de nuez y decorados con granada.',
+        'Barbacoa': 'Carne cocida al vapor en hojas de maguey, acompañada de consomé y tortillas.',
+        'Carnitas': 'Carne de cerdo frita en su propia grasa, servida con tortillas, salsa y limón.',
+        'Tlayudas': 'Tortillas grandes y crujientes cubiertas con frijoles, carne, queso y salsa.',
+        'Tacos': 'Tortillas rellenas de carne, acompañadas de salsa, cebolla y cilantro.',
+        'Ensalada mediterránea': 'Una mezcla fresca de vegetales, aceitunas, queso feta y aderezo de aceite de oliva.',
+        'Ensalada César con pollo': 'Lechuga romana, crutones, queso parmesano y pollo a la parrilla con aderezo César.',
+        'Crema de calabaza': 'Una sopa cremosa hecha con calabaza, especias y un toque de crema.',
+        'Fideos chinos con pollo y verduras': 'Fideos salteados con pollo, zanahorias, pimientos y salsa de soya.',
+        'Espaguetis con queso y pimienta negra': 'Un plato clásico italiano con espaguetis, queso parmesano y pimienta negra.',
+        'Macarrones con berenjenas y tomate': 'Macarrones al horno con berenjenas, tomate y queso gratinado.',
+        'Huevos revueltos': 'Huevos revueltos con jamón, queso y un toque de perejil fresco.',
+        'Muslos de pollo': 'Muslos de pollo marinados y asados, acompañados de pure de papa.',
+        'Pay de Limón': 'Un delicioso pay con base de galleta, relleno de crema de limón y cubierto con merengue.',
+        'Flan Napolitano': 'Un postre cremoso y suave, preparado con leche condensada, huevos y caramelo.',
+        'Pay de Mango': 'Un pay tropical con base de galleta, relleno de crema de mango y decorado con trozos de fruta.',
+        'Gelatina de Chocolate': 'Una gelatina cremosa con sabor a chocolate, perfecta para los amantes del cacao.',
+        'Brownie': 'Un postre clásico de chocolate, con una textura suave y un sabor intenso.',
+        'Pastel de Chocolate': 'Un pastel esponjoso y húmedo, cubierto con una rica crema de chocolate.',
+        'Tiramisú': 'Un postre italiano con capas de bizcocho, café, crema de mascarpone y cacao.',
+        'Carlota de Durazno': 'Un postre frío con capas de galleta, crema y duraznos frescos.'
+      };
+
+      const PRODUCT_IDS = {
+        'Pancakes': 'D001', 'Omelette': 'D002', 'Chilaquiles': 'D003', 'Molletes': 'D004',
+        'Wafles': 'D005', 'Tostadas': 'D006', 'Huevos Rancheros': 'D007', 'Enchiladas': 'D008',
+        'Café Americano': 'B001', 'Café Capuchino': 'B002', 'Café Espresso': 'B003', 'Café Machiatto': 'B004',
+        'Café Azteca': 'B005', 'Café Frappe': 'B006', 'Café Latte': 'B007', 'Café Con Leche': 'B008',
+        'Mole': 'C001', 'Pozole': 'C002', 'Cochinita Pibil': 'C003', 'Chiles en Nogada': 'C004',
+        'Barbacoa': 'C005', 'Carnitas': 'C006', 'Tlayudas': 'C007', 'Tacos': 'C008',
+        'Ensalada mediterránea': 'CN001', 'Ensalada César con pollo': 'CN002', 'Crema de calabaza': 'CN003',
+        'Fideos chinos con pollo y verduras': 'CN004', 'Espaguetis con queso y pimienta negra': 'CN005',
+        'Macarrones con berenjenas y tomate': 'CN006', 'Huevos revueltos': 'CN007', 'Muslos de pollo': 'CN008',
+        'Pay de Limón': 'P001', 'Flan Napolitano': 'P002', 'Pay de Mango': 'P003', 'Gelatina de Chocolate': 'P004',
+        'Brownie': 'P005', 'Pastel de Chocolate': 'P006', 'Tiramisú': 'P007', 'Carlota de Durazno': 'P008'
+      };
+
+      // ===== RENDER PRODUCTS =====
+      function renderProducts(category, gridId) {
+        const grid = document.getElementById(gridId);
+        grid.innerHTML = '';
+        
+        PRODUCTS[category].forEach(product => {
+          const productDiv = document.createElement('div');
+          productDiv.className = 'product-item';
+          
+          const img = document.createElement('img');
+          img.src = product.img;
+          img.alt = product.name;
+          img.onclick = () => {
+            openModal(product.name, product.price, product.img);
+            openSidePanel(product.name, product.price);
+          };
+          
+          productDiv.appendChild(img);
+          grid.appendChild(productDiv);
+        });
+      }
+
+      // ===== MODAL FUNCTIONS =====
+      function openModal(name, price, img) {
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `
+          <span class="close" onclick="this.parentElement.remove(); document.querySelectorAll('.modal-overlay.active').forEach(el => el.classList.remove('active'));">&times;</span>
+          <img src="${img}" alt="${name}">
+          <h2>${name}</h2>
+          <p>${PRODUCT_DESCRIPTIONS[name] || 'Producto delicioso'}</p>
+        `;
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay active';
+        overlay.onclick = () => {
+          modal.remove();
+          overlay.remove();
+        };
+        
+        document.body.appendChild(overlay);
+        document.body.appendChild(modal);
+      }
+
+      // ===== SIDE PANEL FUNCTIONS =====
+      function openSidePanel(name, price) {
+        const panel = document.getElementById('sidePanel');
+        document.getElementById('productName').textContent = name;
+        document.getElementById('productPrice').textContent = `Precio: $${price}`;
+        document.getElementById('productId').value = PRODUCT_IDS[name] || '';
+        document.getElementById('quantity').value = '1';
+        panel.classList.add('active');
       }
 
       function closeSidePanel() {
-        const sidePanel = document.getElementById('sidePanel');
-        sidePanel.classList.remove('open');
+        document.getElementById('sidePanel').classList.remove('active');
       }
 
+      // ===== ORDER CONFIRMATION =====
       function confirmOrder() {
         const productName = document.getElementById('productName').textContent;
         const quantity = parseInt(document.getElementById('quantity').value, 10);
@@ -1355,566 +905,64 @@
 
         let price = 0;
         const match = productPriceText.match(/([\d.]+)/);
-        if (match) {
-          price = parseFloat(match[1]);
-        }
+        if (match) price = parseFloat(match[1]);
 
         const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        orders.push({ 
-          productId, 
-          productName, 
-          quantity, 
-          price, 
-          waiter, 
-          client, 
-          orderTime 
-        });
+        orders.push({ productId, productName, quantity, price, waiter, client, orderTime });
         localStorage.setItem('orders', JSON.stringify(orders));
 
         alert('Pedido confirmado exitosamente.');
         closeSidePanel();
       }
 
-      function scrollToSection(sectionId) {
-        const sections = ['desayunos-section', 'bebidas-section', 'comidas-section', 'cenas-section', 'postres-section'];
-        sections.forEach(id => {
-          const section = document.getElementById(id);
-          if (section) {
-            section.style.display = id === sectionId ? 'inline-block' : 'none';
-          }
+      // ===== NAVIGATION =====
+      function switchSection(sectionId, gridId) {
+        document.querySelectorAll('.products-section').forEach(section => {
+          section.classList.remove('active');
         });
-
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-          window.scrollTo({
-            top: targetSection.offsetTop,
-            behavior: 'smooth'
-          });
-        }
+        document.getElementById(sectionId).classList.add('active');
+        renderProducts(gridId, gridId + 'Grid');
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = [
-          { selector: 'a[href="#desayunos"]', section: 'desayunos-section' },
-          { selector: 'a[href="#bebidas"]', section: 'bebidas-section' },
-          { selector: 'a[href="#comidas"]', section: 'comidas-section' },
-          { selector: 'a[href="#cenas"]', section: 'cenas-section' },
-          { selector: 'a[href="#postres"]', section: 'postres-section' }
-        ];
-        
-        navLinks.forEach(link => {
-          const el = document.querySelector(link.selector);
-          if (el) {
-            el.addEventListener('click', (e) => {
-              e.preventDefault();
-              scrollToSection(link.section);
-            });
-          }
-        });
+      // ===== HAMBURGER MENU =====
+      document.getElementById('hamburger').addEventListener('click', () => {
+        document.getElementById('menu').classList.toggle('active');
+      });
 
-        const productImages = [
-          { id: 'myImageAmericano', name: 'Café Americano', price: '25.00' },
-          { id: 'myImageCapuchino', name: 'Café Capuchino', price: '30.00' },
-          { id: 'myImageEspresso', name: 'Café Espresso', price: '20.00' },
-          { id: 'myImageMachiatto', name: 'Café Machiatto', price: '35.00' },
-          { id: 'myImageAztecaRenamed', name: 'Café Azteca', price: '40.00' },
-          { id: 'myImageFrappeRenamed', name: 'Café Frappe', price: '45.00' },
-          { id: 'myImageLatteRenamed', name: 'Café Latte', price: '50.00' },
-          { id: 'myImageConlecheRenamed', name: 'Café Con Leche', price: '55.00' },
-          { id: 'myImagePancakes', name: 'Pancakes', price: '50.00' },
-          { id: 'myImageOmelette', name: 'Omelette', price: '60.00' },
-          { id: 'myImageChilaquiles', name: 'Chilaquiles', price: '70.00' },
-          { id: 'myImageMolletes', name: 'Molletes', price: '55.00' },
-          { id: 'myImageHotcakes', name: 'Hotcakes', price: '50.00' },
-          { id: 'myImageTostadas', name: 'Tostadas', price: '45.00' },
-          { id: 'myImageHuevosRancheros', name: 'Huevos Rancheros', price: '65.00' },
-          { id: 'myImageEnchiladas', name: 'Enchiladas', price: '75.00' },
-          { id: 'myImagePlatillo1', name: 'Mole', price: '120.00' },
-          { id: 'myImagePlatillo8', name: 'Pozole', price: '110.00' },
-          { id: 'myImagePlatilloCochinita', name: 'Cochinita Pibil', price: '130.00' },
-          { id: 'myImagePlatilloChiles', name: 'Chiles en Nogada', price: '140.00' },
-          { id: 'myImagePlatilloBarbacoa', name: 'Barbacoa', price: '150.00' },
-          { id: 'myImagePlatilloCarnitas', name: 'Carnitas', price: '125.00' },
-          { id: 'myImagePlatilloTlayudas', name: 'Tlayudas', price: '135.00' },
-          { id: 'myImagePlatilloTacos', name: 'Tacos', price: '100.00' },
-          { id: 'myImageCena1', name: 'Ensalada mediterránea', price: '80.00' },
-          { id: 'myImageCena2', name: 'Ensalada César con pollo', price: '85.00' },
-          { id: 'myImageCena3', name: 'Crema de calabaza', price: '90.00' },
-          { id: 'myImageCena4', name: 'Fideos chinos con pollo y verduras', price: '95.00' },
-          { id: 'myImageCena5', name: 'Espaguetis con queso y pimienta negra', price: '100.00' },
-          { id: 'myImageCena6', name: 'Macarrones con berenjenas y tomate', price: '105.00' },
-          { id: 'myImageCena7', name: 'Huevos revueltos', price: '110.00' },
-          { id: 'myImageCena8', name: 'Muslos de pollo', price: '115.00' },
-          { id: 'myImagePostre1', name: 'Pay de Limón', price: '40.00' },
-          { id: 'myImagePostre2', name: 'Flan Napolitano', price: '45.00' },
-          { id: 'myImagePostre3', name: 'Pay de Mango', price: '50.00' },
-          { id: 'myImagePostre4', name: 'Gelatina de Chocolate', price: '35.00' },
-          { id: 'myImagePostre5', name: 'Brownie', price: '55.00' },
-          { id: 'myImagePostre6', name: 'Pastel de Chocolate', price: '60.00' },
-          { id: 'myImagePostre7', name: 'Tiramisú', price: '70.00' },
-          { id: 'myImagePostre8', name: 'Carlota de Durazno', price: '65.00' }
-        ];
-
-        productImages.forEach(prod => {
-          const img = document.getElementById(prod.id);
-          if (img) {
-            img.addEventListener('click', () => openSidePanel(prod.name, prod.price));
-          }
+      document.querySelectorAll('.menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('menu').classList.remove('active');
         });
       });
 
-      function setupModal(imageId, modalId, overlayId, closeId) {
-        const image = document.getElementById(imageId);
-        const modal = document.getElementById(modalId);
-        const modalOverlay = document.getElementById(overlayId);
-        const closeModal = document.getElementById(closeId);
+      // ===== NAVIGATION LINKS =====
+      document.querySelector('a[href="#desayunos"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        switchSection('desayunos-section', 'desayunos');
+      });
 
-        if (image && modal && modalOverlay && closeModal) {
-          image.onclick = function() {
-            modal.style.display = 'block';
-            modalOverlay.style.display = 'block';
-          }
+      document.querySelector('a[href="#bebidas"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        switchSection('bebidas-section', 'bebidas');
+      });
 
-          closeModal.onclick = function() {
-            modal.style.display = 'none';
-            modalOverlay.style.display = 'none';
-            closeSidePanel();
-          }
+      document.querySelector('a[href="#comidas"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        switchSection('comidas-section', 'comidas');
+      });
 
-          modalOverlay.onclick = function() {
-            modal.style.display = 'none';
-            modalOverlay.style.display = 'none';
-            closeSidePanel();
-          }
-        }
-      }
+      document.querySelector('a[href="#cenas"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        switchSection('cenas-section', 'cenas');
+      });
 
-      setupModal('myImageAmericano', 'myModalAmericano', 'modalOverlayAmericano', 'closeModalAmericano');
-      setupModal('myImageCapuchino', 'myModalCapuchino', 'modalOverlayCapuchino', 'closeModalCapuchino');
-      setupModal('myImageEspresso', 'myModalEspresso', 'modalOverlayEspresso', 'closeModalEspresso');
-      setupModal('myImageMachiatto', 'myModalMachiatto', 'modalOverlayMachiatto', 'closeModalMachiatto');
-      setupModal('myImagePancakes', 'myModalPancakes', 'modalOverlayPancakes', 'closeModalPancakes');
-      setupModal('myImageOmelette', 'myModalOmelette', 'modalOverlayOmelette', 'closeModalOmelette');
-      setupModal('myImageAztecaRenamed', 'myModalAztecaRenamed', 'modalOverlayAztecaRenamed', 'closeModalAztecaRenamed');
-      setupModal('myImageFrappeRenamed', 'myModalFrappeRenamed', 'modalOverlayFrappeRenamed', 'closeModalFrappeRenamed');
-      setupModal('myImageLatteRenamed', 'myModalLatteRenamed', 'modalOverlayLatteRenamed', 'closeModalLatteRenamed');
-      setupModal('myImageConlecheRenamed', 'myModalConlecheRenamed', 'modalOverlayConlecheRenamed', 'closeModalConlecheRenamed');
-      setupModal('myImageChilaquiles', 'myModalChilaquiles', 'modalOverlayChilaquiles', 'closeModalChilaquiles');
-      setupModal('myImageMolletes', 'myModalMolletes', 'modalOverlayMolletes', 'closeModalMolletes');
-      setupModal('myImageHotcakes', 'myModalHotcakes', 'modalOverlayHotcakes', 'closeModalHotcakes');
-      setupModal('myImageTostadas', 'myModalTostadas', 'modalOverlayTostadas', 'closeModalTostadas');
-      setupModal('myImageHuevosRancheros', 'myModalHuevosRancheros', 'modalOverlayHuevosRancheros', 'closeModalHuevosRancheros');
-      setupModal('myImageEnchiladas', 'myModalEnchiladas', 'modalOverlayEnchiladas', 'closeModalEnchiladas');
-      setupModal('myImagePlatillo1', 'myModalPlatillo1', 'modalOverlayPlatillo1', 'closeModalPlatillo1');
-      setupModal('myImagePlatillo8', 'myModalPlatillo8', 'modalOverlayPlatillo8', 'closeModalPlatillo8');
-      setupModal('myImagePlatilloCochinita', 'myModalPlatilloCochinita', 'modalOverlayPlatilloCochinita', 'closeModalPlatilloCochinita');
-      setupModal('myImagePlatilloChiles', 'myModalPlatilloChiles', 'modalOverlayPlatilloChiles', 'closeModalPlatilloChiles');
-      setupModal('myImagePlatilloBarbacoa', 'myModalPlatilloBarbacoa', 'modalOverlayPlatilloBarbacoa', 'closeModalPlatilloBarbacoa');
-      setupModal('myImagePlatilloCarnitas', 'myModalPlatilloCarnitas', 'modalOverlayPlatilloCarnitas', 'closeModalPlatilloCarnitas');
-      setupModal('myImagePlatilloTlayudas', 'myModalPlatilloTlayudas', 'modalOverlayPlatilloTlayudas', 'closeModalPlatilloTlayudas');
-      setupModal('myImagePlatilloTacos', 'myModalPlatilloTacos', 'modalOverlayPlatilloTacos', 'closeModalPlatilloTacos');
-      setupModal('myImageCena1', 'myModalCena1', 'modalOverlayCena1', 'closeModalCena1');
-      setupModal('myImageCena2', 'myModalCena2', 'modalOverlayCena2', 'closeModalCena2');
-      setupModal('myImageCena3', 'myModalCena3', 'modalOverlayCena3', 'closeModalCena3');
-      setupModal('myImageCena4', 'myModalCena4', 'modalOverlayCena4', 'closeModalCena4');
-      setupModal('myImageCena5', 'myModalCena5', 'modalOverlayCena5', 'closeModalCena5');
-      setupModal('myImageCena6', 'myModalCena6', 'modalOverlayCena6', 'closeModalCena6');
-      setupModal('myImageCena7', 'myModalCena7', 'modalOverlayCena7', 'closeModalCena7');
-      setupModal('myImageCena8', 'myModalCena8', 'modalOverlayCena8', 'closeModalCena8');
-      setupModal('myImagePostre1', 'myModalPostre1', 'modalOverlayPostre1', 'closeModalPostre1');
-      setupModal('myImagePostre2', 'myModalPostre2', 'modalOverlayPostre2', 'closeModalPostre2');
-      setupModal('myImagePostre3', 'myModalPostre3', 'modalOverlayPostre3', 'closeModalPostre3');
-      setupModal('myImagePostre4', 'myModalPostre4', 'modalOverlayPostre4', 'closeModalPostre4');
-      setupModal('myImagePostre5', 'myModalPostre5', 'modalOverlayPostre5', 'closeModalPostre5');
-      setupModal('myImagePostre6', 'myModalPostre6', 'modalOverlayPostre6', 'closeModalPostre6');
-      setupModal('myImagePostre7', 'myModalPostre7', 'modalOverlayPostre7', 'closeModalPostre7');
-      setupModal('myImagePostre8', 'myModalPostre8', 'modalOverlayPostre8', 'closeModalPostre8');
+      document.querySelector('a[href="#postres"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        switchSection('postres-section', 'postres');
+      });
+
+      // ===== INIT =====
+      renderProducts('desayunos', 'desayunosGrid');
     </script>
 </body>
-</html>close" id="closeModalPancakes">&times;</span>
-        <img src="Imagenes/Pancakes.jpg" alt="Pancakes">
-        <h2>Pancakes</h2>
-        <p>Deliciosos pancakes con miel y frutas frescas.</p>
-      </div>
-
-      <div class="Omelette">
-        <img src="Imagenes/Omelette.png" alt="Omelette" id="myImageOmelette">
-      </div>
-      <div class="modal-overlay" id="modalOverlayOmelette"></div>
-      <div class="modal" id="myModalOmelette">
-        <span class="close" id="closeModalOmelette">&times;</span>
-        <img src="Imagenes/Omelette.jpeg" alt="Omelette">
-        <h2>Omelette</h2>
-        <p>Omelette de queso y jamón con una guarnición de ensalada.</p>
-      </div>
-
-      <div class="Chilaquiles">
-        <img src="Imagenes/Chilaquiles.png" alt="Chilaquiles" id="myImageChilaquiles">
-      </div>
-      <div class="modal-overlay" id="modalOverlayChilaquiles"></div>
-      <div class="modal" id="myModalChilaquiles">
-        <span class="close" id="closeModalChilaquiles">&times;</span>
-        <img src="Imagenes/Chilaquiles.jpg" alt="Chilaquiles">
-        <h2>Chilaquiles</h2>
-        <p>Chilaquiles verdes o rojos con pollo y crema.</p>
-      </div>
-
-      <div class="Molletes">
-        <img src="Imagenes/Molletes.png" alt="Molletes" id="myImageMolletes">
-      </div>
-      <div class="modal-overlay" id="modalOverlayMolletes"></div>
-      <div class="modal" id="myModalMolletes">
-        <span class="close" id="closeModalMolletes">&times;</span>
-        <img src="Imagenes/Molletes.jpg" alt="Molletes">
-        <h2>Molletes</h2>
-        <p>Molletes con frijoles, queso y pico de gallo.</p>
-      </div>
-
-      <div class="Hotcakes">
-        <img src="Imagenes/Wafles.png" alt="Wafles" id="myImageHotcakes">
-      </div>
-      <div class="modal-overlay" id="modalOverlayHotcakes"></div>
-      <div class="modal" id="myModalHotcakes">
-        <span class="close" id="closeModalHotcakes">&times;</span>
-        <img src="Imagenes/Hotcakes.jpg" alt="Hotcakes">
-        <h2>Wafles</h2>
-        <p>Wafles con mantequilla y miel de maple.</p>
-      </div>
-
-      <div class="Tostadas">
-        <img src="Imagenes/Tostadas.png" alt="Tostadas" id="myImageTostadas">
-      </div>
-      <div class="modal-overlay" id="modalOverlayTostadas"></div>
-      <div class="modal" id="myModalTostadas">
-        <span class="close" id="closeModalTostadas">&times;</span>
-        <img src="Imagenes/Tostadas.jpg" alt="Tostadas">
-        <h2>Tostadas</h2>
-        <p>Tostadas con aguacate, huevo y queso fresco.</p>
-      </div>
-
-      <div class="HuevosRancheros">
-        <img src="Imagenes/Huevosranch.png" alt="Huevos Rancheros" id="myImageHuevosRancheros">
-      </div>
-      <div class="modal-overlay" id="modalOverlayHuevosRancheros"></div>
-      <div class="modal" id="myModalHuevosRancheros">
-        <span class="close" id="closeModalHuevosRancheros">&times;</span>
-        <img src="Imagenes/HuevosRancheros.jpg" alt="Huevos Rancheros">
-        <h2>Huevos Rancheros</h2>
-        <p>Huevos estrellados sobre tortilla con salsa ranchera.</p>
-      </div>
-
-      <div class="Enchiladas">
-        <img src="Imagenes/Enchiladas.png" alt="Enchiladas" id="myImageEnchiladas">
-      </div>
-      <div class="modal-overlay" id="modalOverlayEnchiladas"></div>
-      <div class="modal" id="myModalEnchiladas">
-        <span class="close" id="closeModalEnchiladas">&times;</span>
-        <img src="Imagenes/Enchiladas.jpg" alt="Enchiladas">
-        <h2>Enchiladas</h2>
-        <p>Enchiladas verdes o rojas rellenas de pollo y cubiertas con queso y crema.</p>
-      </div>
-    </div>
-
-    <!-- SECCIÓN BEBIDAS -->
-    <div id="bebidas-section" style="display: inline-block;">
-      <div class="Americano">
-        <img src="Imagenes/Americano.png" alt="Café Americano" id="myImageAmericano">
-      </div>
-      <div class="modal-overlay" id="modalOverlayAmericano"></div>
-      <div class="modal" id="myModalAmericano">
-        <span class="close" id="closeModalAmericano">&times;</span>
-        <img src="Imagenes/CaféAmericano.jpg" alt="Café Americano">
-        <h2>Café Americano</h2>
-        <p>Es una bebida de café que combina partes iguales de espresso, leche vaporizada y espuma de leche</p>
-      </div>
-
-      <div class="Capuchino">
-        <img src="Imagenes/Capuchino.png" alt="Café Capuchino" id="myImageCapuchino">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCapuchino"></div>
-      <div class="modal" id="myModalCapuchino">
-        <span class="close" id="closeModalCapuchino">&times;</span>
-        <img src="Imagenes/CaféAmericano.jpg" alt="Café Capuchino">
-        <h2>Café Capuchino</h2>
-        <p>Compuesto por café tostado y molido y agua caliente.</p>
-      </div>
-
-      <div class="Espresso">
-        <img src="Imagenes/Espresso.png" alt="Café Espresso" id="myImageEspresso">
-      </div>
-      <div class="modal-overlay" id="modalOverlayEspresso"></div>
-      <div class="modal" id="myModalEspresso">
-        <span class="close" id="closeModalEspresso">&times;</span>
-        <img src="Imagenes/CaféAmericano.jpg" alt="Café Espresso">
-        <h2>Café Espresso</h2>
-        <p>Es un café concentrado que se prepara forzando agua caliente a través de café finamente molido.</p>
-      </div>
-
-      <div class="Machiatto">
-        <img src="Imagenes/Machiatto.png" alt="Café Machiatto" id="myImageMachiatto">
-      </div>
-      <div class="modal-overlay" id="modalOverlayMachiatto"></div>
-      <div class="modal" id="myModalMachiatto">
-        <span class="close" id="closeModalMachiatto">&times;</span>
-        <img src="Imagenes/CaféAmericano.jpg" alt="Café Machiatto">
-        <h2>Café Machiatto</h2>
-        <p>Es un espresso "manchado" o "marcado" con una pequeña cantidad de leche, ya sea vaporizada o espumosa</p>
-      </div>
-
-      <div class="AztecaRenamed">
-        <img src="Imagenes/Azteca.png" alt="Café Azteca" id="myImageAztecaRenamed">
-      </div>
-      <div class="modal-overlay" id="modalOverlayAztecaRenamed"></div>
-      <div class="modal" id="myModalAztecaRenamed">
-        <span class="close" id="closeModalAztecaRenamed">&times;</span>
-        <img src="Imagenes/Azteca.png" alt="Café Azteca">
-        <h2>Café Azteca</h2>
-        <p>Es un café especial con un toque de chocolate y especias.</p>
-      </div>
-
-      <div class="FrappeRenamed">
-        <img src="Imagenes/Frappe.png" alt="Café Frappe" id="myImageFrappeRenamed">
-      </div>
-      <div class="modal-overlay" id="modalOverlayFrappeRenamed"></div>
-      <div class="modal" id="myModalFrappeRenamed">
-        <span class="close" id="closeModalFrappeRenamed">&times;</span>
-        <img src="Imagenes/Frappe.png" alt="Café Frappe">
-        <h2>Café Frappe</h2>
-        <p>Es una bebida fría y espumosa, generalmente hecha con café instantáneo, agua, azúcar y hielo.</p>
-      </div>
-
-      <div class="LatteRenamed">
-        <img src="Imagenes/Latte.png" alt="Café Latte" id="myImageLatteRenamed">
-      </div>
-      <div class="modal-overlay" id="modalOverlayLatteRenamed"></div>
-      <div class="modal" id="myModalLatteRenamed">
-        <span class="close" id="closeModalLatteRenamed">&times;</span>
-        <img src="Imagenes/Latte.png" alt="Café Latte">
-        <h2>Café Latte</h2>
-        <p>Es una bebida tradicional que combina café con especias como canela y chocolate.</p>
-      </div>
-
-      <div class="ConlecheRenamed">
-        <img src="Imagenes/conleche.png" alt="Café Con Leche" id="myImageConlecheRenamed">
-      </div>
-      <div class="modal-overlay" id="modalOverlayConlecheRenamed"></div>
-      <div class="modal" id="myModalConlecheRenamed">
-        <span class="close" id="closeModalConlecheRenamed">&times;</span>
-        <img src="Imagenes/conleche.png" alt="Café Con Leche">
-        <h2>Café Con Leche</h2>
-        <p>Es una bebida simple que consiste en café negro y leche caliente en partes iguales o en proporciones ajustadas al gusto.</p>
-      </div>
-    </div>
-
-    <!-- SECCIÓN COMIDAS -->
-    <div id="comidas-section" style="display: none;">
-      <div class="Mole">
-        <img src="Imagenes/Mole.png" alt="Mole" id="myImagePlatillo1">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatillo1"></div>
-      <div class="modal" id="myModalPlatillo1">
-        <span class="close" id="closeModalPlatillo1">&times;</span>
-        <img src="Imagenes/Platillo1.jpg" alt="Mole">
-        <h2>Mole</h2>
-        <p>Un platillo tradicional mexicano hecho con una mezcla de chiles, especias y chocolate.</p>
-      </div>
-
-      <div class="Pozole">
-        <img src="Imagenes/Pozole.png" alt="Pozole" id="myImagePlatillo8">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatillo8"></div>
-      <div class="modal" id="myModalPlatillo8">
-        <span class="close" id="closeModalPlatillo8">&times;</span>
-        <img src="Imagenes/Platillo8.jpg" alt="Pozole">
-        <h2>Pozole</h2>
-        <p>Un caldo tradicional preparado con maíz, carne y acompañado de lechuga, rábanos y limón.</p>
-      </div>
-
-      <div class="Cochinita">
-        <img src="Imagenes/Cochinita.png" alt="Cochinita Pibil" id="myImagePlatilloCochinita">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatilloCochinita"></div>
-      <div class="modal" id="myModalPlatilloCochinita">
-        <span class="close" id="closeModalPlatilloCochinita">&times;</span>
-        <img src="Imagenes/Cochinita.jpg" alt="Cochinita Pibil">
-        <h2>Cochinita Pibil</h2>
-        <p>Carne de cerdo marinada en achiote y jugo de naranja, cocida lentamente y servida con tortillas.</p>
-      </div>
-
-      <div class="Chiles">
-        <img src="Imagenes/Chiles.png" alt="Chiles en Nogada" id="myImagePlatilloChiles">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatilloChiles"></div>
-      <div class="modal" id="myModalPlatilloChiles">
-        <span class="close" id="closeModalPlatilloChiles">&times;</span>
-        <img src="Imagenes/Chiles.jpg" alt="Chiles en Nogada">
-        <h2>Chiles en Nogada</h2>
-        <p>Chiles poblanos rellenos de carne y frutas, bañados en una salsa de nuez y decorados con granada.</p>
-      </div>
-
-      <div class="Barbacoa">
-        <img src="Imagenes/Barbacoa.png" alt="Barbacoa" id="myImagePlatilloBarbacoa">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatilloBarbacoa"></div>
-      <div class="modal" id="myModalPlatilloBarbacoa">
-        <span class="close" id="closeModalPlatilloBarbacoa">&times;</span>
-        <img src="Imagenes/Barbacoa.jpg" alt="Barbacoa">
-        <h2>Barbacoa</h2>
-        <p>Carne cocida al vapor en hojas de maguey, acompañada de consomé y tortillas.</p>
-      </div>
-
-      <div class="Carnitas">
-        <img src="Imagenes/Carnitas.png" alt="Carnitas" id="myImagePlatilloCarnitas">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatilloCarnitas"></div>
-      <div class="modal" id="myModalPlatilloCarnitas">
-        <span class="close" id="closeModalPlatilloCarnitas">&times;</span>
-        <img src="Imagenes/Carnitas.jpg" alt="Carnitas">
-        <h2>Carnitas</h2>
-        <p>Carne de cerdo frita en su propia grasa, servida con tortillas, salsa y limón.</p>
-      </div>
-
-      <div class="Tlayudas">
-        <img src="Imagenes/Tlayudas.png" alt="Tlayudas" id="myImagePlatilloTlayudas">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatilloTlayudas"></div>
-      <div class="modal" id="myModalPlatilloTlayudas">
-        <span class="close" id="closeModalPlatilloTlayudas">&times;</span>
-        <img src="Imagenes/Tlayudas.jpg" alt="Tlayudas">
-        <h2>Tlayudas</h2>
-        <p>Tortillas grandes y crujientes cubiertas con frijoles, carne, queso y salsa.</p>
-      </div>
-
-      <div class="Tacos">
-        <img src="Imagenes/Tacos (2).png" alt="Tacos" id="myImagePlatilloTacos">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPlatilloTacos"></div>
-      <div class="modal" id="myModalPlatilloTacos">
-        <span class="close" id="closeModalPlatilloTacos">&times;</span>
-        <img src="Imagenes/Tacos.jpg" alt="Tacos">
-        <h2>Tacos</h2>
-        <p>Tortillas rellenas de carne, acompañadas de salsa, cebolla y cilantro.</p>
-      </div>
-    </div>
-
-    <!-- SECCIÓN CENAS -->
-    <div id="cenas-section" style="display: none;">
-      <div class="Cena1">
-        <img src="Imagenes/Ensalada.png" alt="Ensalada Mediterránea" id="myImageCena1">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena1"></div>
-      <div class="modal" id="myModalCena1">
-        <span class="close" id="closeModalCena1">&times;</span>
-        <img src="Imagenes/Cena1.jpg" alt="Ensalada Mediterránea">
-        <h2>Ensalada mediterránea</h2>
-        <p>Una mezcla fresca de vegetales, aceitunas, queso feta y aderezo de aceite de oliva.</p>
-      </div>
-
-      <div class="Cena2">
-        <img src="Imagenes/cesar.png" alt="Ensalada César" id="myImageCena2">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena2"></div>
-      <div class="modal" id="myModalCena2">
-        <span class="close" id="closeModalCena2">&times;</span>
-        <img src="Imagenes/Cena2.jpg" alt="Ensalada César">
-        <h2>Ensalada César con pollo</h2>
-        <p>Lechuga romana, crutones, queso parmesano y pollo a la parrilla con aderezo César.</p>
-      </div>
-
-      <div class="Cena3">
-        <img src="Imagenes/Crema.png" alt="Crema de Calabaza" id="myImageCena3">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena3"></div>
-      <div class="modal" id="myModalCena3">
-        <span class="close" id="closeModalCena3">&times;</span>
-        <img src="Imagenes/Cena3.jpg" alt="Crema de Calabaza">
-        <h2>Crema de calabaza</h2>
-        <p>Una sopa cremosa hecha con calabaza, especias y un toque de crema.</p>
-      </div>
-
-      <div class="Cena4">
-        <img src="Imagenes/Fideos.png" alt="Fideos Chinos" id="myImageCena4">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena4"></div>
-      <div class="modal" id="myModalCena4">
-        <span class="close" id="closeModalCena4">&times;</span>
-        <img src="Imagenes/Cena4.jpg" alt="Fideos Chinos">
-        <h2>Fideos chinos con pollo y verduras</h2>
-        <p>Fideos salteados con pollo, zanahorias, pimientos y salsa de soya.</p>
-      </div>
-
-      <div class="Cena5">
-        <img src="Imagenes/Espaguetis.png" alt="Espaguetis" id="myImageCena5">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena5"></div>
-      <div class="modal" id="myModalCena5">
-        <span class="close" id="closeModalCena5">&times;</span>
-        <img src="Imagenes/Cena5.jpg" alt="Espaguetis">
-        <h2>Espaguetis con queso y pimienta negra</h2>
-        <p>Un plato clásico italiano con espaguetis, queso parmesano y pimienta negra.</p>
-      </div>
-
-      <div class="Cena6">
-        <img src="Imagenes/Macarrones.png" alt="Macarrones" id="myImageCena6">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena6"></div>
-      <div class="modal" id="myModalCena6">
-        <span class="close" id="closeModalCena6">&times;</span>
-        <img src="Imagenes/Cena6.jpg" alt="Macarrones">
-        <h2>Macarrones con berenjenas y tomate</h2>
-        <p>Macarrones al horno con berenjenas, tomate y queso gratinado.</p>
-      </div>
-
-      <div class="Cena7">
-        <img src="Imagenes/Huevos.png" alt="Huevos Revueltos" id="myImageCena7">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena7"></div>
-      <div class="modal" id="myModalCena7">
-        <span class="close" id="closeModalCena7">&times;</span>
-        <img src="Imagenes/Cena7.jpg" alt="Huevos Revueltos">
-        <h2>Huevos revueltos</h2>
-        <p>Huevos revueltos con jamón, queso y un toque de perejil fresco.</p>
-      </div>
-
-      <div class="Cena8">
-        <img src="Imagenes/Muslos.png" alt="Muslos de Pollo" id="myImageCena8">
-      </div>
-      <div class="modal-overlay" id="modalOverlayCena8"></div>
-      <div class="modal" id="myModalCena8">
-        <span class="close" id="closeModalCena8">&times;</span>
-        <img src="Imagenes/Cena8.jpg" alt="Muslos de Pollo">
-        <h2>Muslos de pollo</h2>
-        <p>Muslos de pollo marinados y asados, acompañados de pure de papa.</p>
-      </div>
-    </div>
-
-    <!-- SECCIÓN POSTRES -->
-    <div id="postres-section" style="display: none;">
-      <div class="Postre1">
-        <img src="Imagenes/Pay.png" alt="Pay de Limón" id="myImagePostre1">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre1"></div>
-      <div class="modal" id="myModalPostre1">
-        <span class="close" id="closeModalPostre1">&times;</span>
-        <img src="Imagenes/Pay.png" alt="Pay de Limón">
-        <h2>Pay de Limón</h2>
-        <p>Un delicioso pay con base de galleta, relleno de crema de limón y cubierto con merengue.</p>
-      </div>
-
-      <div class="Postre2">
-        <img src="Imagenes/Flan.png" alt="Flan Napolitano" id="myImagePostre2">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre2"></div>
-      <div class="modal" id="myModalPostre2">
-        <span class="close" id="closeModalPostre2">&times;</span>
-        <img src="Imagenes/Flan.png" alt="Flan Napolitano">
-        <h2>Flan Napolitano</h2>
-        <p>Un postre cremoso y suave, preparado con leche condensada, huevos y caramelo.</p>
-      </div>
-
-      <div class="Postre3">
-        <img src="Imagenes/Paymango.png" alt="Pay de Mango" id="myImagePostre3">
-      </div>
-      <div class="modal-overlay" id="modalOverlayPostre3"></div>
-      <div class="modal" id="myModalPostre3">
-        <span class="
+</html>
